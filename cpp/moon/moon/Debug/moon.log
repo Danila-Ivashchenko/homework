@@ -1,0 +1,7 @@
+﻿  moon.cpp
+C:\Users\dan03\source\repos\moon\moon\moon.cpp(14,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\dan03\source\repos\moon\moon\moon.cpp(27,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\dan03\source\repos\moon\moon\moon.cpp(51,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\dan03\source\repos\moon\moon\moon.cpp(69,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\dan03\source\repos\moon\moon\moon.cpp(81): warning C4715: find_time: значение возвращается не при всех путях выполнения
+  moon.vcxproj -> C:\Users\dan03\source\repos\moon\Debug\moon.exe
