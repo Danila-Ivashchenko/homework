@@ -113,7 +113,7 @@ double find_el(string str) {
 			if (buf == "")
 				continue;
 			count += 1;
-			if (count == 4)
+			if (count == 5)
 				return convert(buf);
 			buf = "";
 		}
@@ -135,9 +135,9 @@ int count_bytes_to_move(int month, int day, int step) {
 }
 
 int get_time(string str) {
-	int hours = get_data_int(str, 10, 2);
-	int minuts = get_data_int(str, 12, 2);
-	return get_data_int(str, 14, 2) + minuts * 60 + hours * 60 * 60;
+	int hours = get_data_int(str, 8, 2);
+	int minuts = get_data_int(str, 11, 2);
+	return get_data_int(str, 13, 2) + minuts * 60 + hours * 60 * 60;
 }
 
 char *set_time(int seconds) {
@@ -172,9 +172,9 @@ struct data_set
 	};
 
 	data_set(string buf) {
-		year = get_data_int(buf, 1, 4);
-		month = get_data_int(buf, 5, 2);
-		day = get_data_int(buf, 7, 2);
+		year = get_data_int(buf, 0, 4);
+		month = get_data_int(buf, 4, 2);
+		day = get_data_int(buf, 6, 2);
 		el = find_el(buf);
 		seconds = get_time(buf);
 	};
@@ -224,9 +224,8 @@ int main()
 		ofstream out(new_filename, ios::binary);
 
 		while (getline(in, buf).good()) {
-			//cout << buf << endl;
 			data_set data(buf);
-			//data.print();
+			data.print();
 			data.write(out);
 		}
 
