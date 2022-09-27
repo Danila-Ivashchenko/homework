@@ -1,20 +1,24 @@
-#ifndef _GEOMETRY_
-#define _GEOMETRY_
+#include <iostream>
+#include <fstream>
+
+#ifndef _GEOMETRY_H_
+#define _GEOMETRY_H_
+
+std::istream& operator >>(std::istream& in, Point& p);
+std::ostream& operator <<(std::ostream& out, const Point& p);
+
+std::ofstream& operator << (std::ostream &out, Point& p);
+std::ifstream& operator >> (std::ifstream &in, Point p);
+
 
 struct Point
 {
 	double x, y;
+	Point() {
+		x = y = 0;
+	};
 };
 
-struct Triangle
-{
-	Point vertex[3];
-	double area;
-};
+#endif // !_GEOMETRY_H_
 
-
-double calc_distance(Point &p1, Point &p2);
-double calc_area_triangle(Triangle& tr);
-
-#endif
-
+#pragma once

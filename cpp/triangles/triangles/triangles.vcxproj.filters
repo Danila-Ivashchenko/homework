@@ -19,17 +19,11 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="geometry.cpp">
-      <Filter>Файлы ресурсов</Filter>
-    </ClCompile>
-    <ClCompile Include="file.cpp">
-      <Filter>Файлы ресурсов</Filter>
+      <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="geometry.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="file.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
