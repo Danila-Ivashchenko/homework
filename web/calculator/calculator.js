@@ -21,7 +21,7 @@ function is_double_char_operator(char_to_check){
 	}
 }
 
-function increment_decrement(arr){
+function increment_decrement_perform(arr){
 	for (let i = 0; i < arr.length; i++){
 		if (arr[i] == "++"){
 			if (arr[i-1] >= 0 && typeof arr[i-1] === 'number'){
@@ -39,11 +39,79 @@ function increment_decrement(arr){
 			if (arr[i-1] >= 0 && typeof arr[i-1] === 'number'){
 				arr[i-1]--;
 				arr.splice(i, 1);
+				i--;
 			} 
 			if (i + 1 < arr.length && typeof arr[i+1] === 'number'){
 				arr[i+1]--;
 				arr.splice(i, 1);
+				i--;
 			}
+		}
+	}
+	return arr;
+}
+
+function sqrt_pow_perform(arr){
+	for (let i = 0; i < arr.length; i++){
+		if (arr[i] == "sqrt"){
+			if (i + 1 < arr.length && typeof arr[i+1] === 'number'){
+				arr[i+1] = Math.sqrt(arr[i+1]);
+				arr.splice(i, 1);
+				i--;
+			}
+			else document.write("Ошибка ", arr[i+1], " Не число<br>");
+		}
+		if (arr[i] == "^"){
+			if (i + 1 < arr.length && i - 1 >= 0 && typeof arr[i+1] === 'number' && typeof arr[i-1] === 'number'){
+				arr[i-1] = Math.pow(arr[i-1], arr[i+1]);
+				arr.splice(i, 2);
+				i--;
+			}
+			else document.write("Ошибка ", arr[i+1], " Не число<br>");
+		}
+	}
+	return arr;
+}
+
+function multi_division_perform(arr){
+	for (let i = 0; i < arr.length; i++){
+		if (arr[i] == "*"){
+			if (i + 1 < arr.length && i - 1 >= 0 && typeof arr[i+1] === 'number' && typeof arr[i-1] === 'number'){
+				arr[i-1] *= arr[i+1];
+				arr.splice(i, 2);
+				i--;
+			}
+			else document.write("Ошибка ", arr[i+1], " Не число<br>");
+		}
+		if (arr[i] == "/"){
+			if (i + 1 < arr.length && i - 1 >= 0 && typeof arr[i+1] === 'number' && typeof arr[i-1] === 'number'){
+				arr[i-1] /= arr[i+1];
+				arr.splice(i, 2);
+				i--;
+			}
+			else document.write("Ошибка ", arr[i+1], " Не число<br>");
+		}
+	}
+	return arr;
+}
+
+function plus_minus_perform(arr){
+	for (let i = 0; i < arr.length; i++){
+		if (arr[i] == "+"){
+			if (i + 1 < arr.length && i - 1 >= 0 && typeof arr[i+1] === 'number' && typeof arr[i-1] === 'number'){
+				arr[i-1] += arr[i+1];
+				arr.splice(i, 2);
+				i--;
+			}
+			else document.write("Ошибка ", arr[i+1], " Не число<br>");
+		}
+		if (arr[i] == "-"){
+			if (i + 1 < arr.length && i - 1 >= 0 && typeof arr[i+1] === 'number' && typeof arr[i-1] === 'number'){
+				arr[i-1] -= arr[i+1];
+				arr.splice(i, 2);
+				i--;
+			}
+			else document.write("Ошибка ", arr[i+1], " Не число<br>");
 		}
 	}
 	return arr;
@@ -87,7 +155,7 @@ function start(){
 	if (buf != ""){
 		all.push(parseFloat(buf));
 	}
-	all = increment_decrement(all);
+	all = plus_minus_perform(multi_division_perform(sqrt_pow_perform(increment_decrement_perform(all))));
 	alert(all);
 
 }
