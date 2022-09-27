@@ -59,7 +59,7 @@ function sqrt_pow_perform(arr){
 				arr.splice(i, 1);
 				i--;
 			}
-			else document.write("Ошибка ", arr[i+1], " Не число<br>");
+			else document.write("Ошибка исполнения операнта ", arr[i]);
 		}
 		if (arr[i] == "^"){
 			if (i + 1 < arr.length && i - 1 >= 0 && typeof arr[i+1] === 'number' && typeof arr[i-1] === 'number'){
@@ -67,7 +67,7 @@ function sqrt_pow_perform(arr){
 				arr.splice(i, 2);
 				i--;
 			}
-			else document.write("Ошибка ", arr[i+1], " Не число<br>");
+			else document.write("Ошибка исполнения операнта ", arr[i]);
 		}
 	}
 	return arr;
@@ -81,7 +81,7 @@ function multi_division_perform(arr){
 				arr.splice(i, 2);
 				i--;
 			}
-			else document.write("Ошибка ", arr[i+1], " Не число<br>");
+			else document.write("Ошибка исполнения операнта ", arr[i]);
 		}
 		if (arr[i] == "/"){
 			if (i + 1 < arr.length && i - 1 >= 0 && typeof arr[i+1] === 'number' && typeof arr[i-1] === 'number'){
@@ -89,7 +89,7 @@ function multi_division_perform(arr){
 				arr.splice(i, 2);
 				i--;
 			}
-			else document.write("Ошибка ", arr[i+1], " Не число<br>");
+			else document.write("Ошибка исполнения операнта ", arr[i]);
 		}
 	}
 	return arr;
@@ -103,7 +103,7 @@ function plus_minus_perform(arr){
 				arr.splice(i, 2);
 				i--;
 			}
-			else document.write("Ошибка ", arr[i+1], " Не число<br>");
+			else document.write("Ошибка исполнения операнта ", arr[i]);
 		}
 		if (arr[i] == "-"){
 			if (i + 1 < arr.length && i - 1 >= 0 && typeof arr[i+1] === 'number' && typeof arr[i-1] === 'number'){
@@ -111,10 +111,18 @@ function plus_minus_perform(arr){
 				arr.splice(i, 2);
 				i--;
 			}
-			else document.write("Ошибка ", arr[i+1], " Не число<br>");
+			else document.write("Ошибка исполнения операнта ", arr[i]);
 		}
 	}
 	return arr;
+}
+
+function execution(arr){
+	arr = increment_decrement_perform(arr)
+	arr = sqrt_pow_perform(arr)
+	arr = multi_division_perform(arr)
+	arr = plus_minus_perform(arr)
+	return arr
 }
 
 function start(){
@@ -155,9 +163,8 @@ function start(){
 	if (buf != ""){
 		all.push(parseFloat(buf));
 	}
-	all = plus_minus_perform(multi_division_perform(sqrt_pow_perform(increment_decrement_perform(all))));
-	alert(all);
 
+	alert(execution(all));
 }
 
 start()
