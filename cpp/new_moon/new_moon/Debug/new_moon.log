@@ -1,7 +1,9 @@
 ﻿  new_moon.cpp
-C:\Users\dan03\OneDrive\Рабочий стол\homework\cpp\new_moon\new_moon\new_moon.cpp(14,20): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\dan03\OneDrive\Рабочий стол\homework\cpp\new_moon\new_moon\new_moon.cpp(78,20): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\dan03\OneDrive\Рабочий стол\homework\cpp\new_moon\new_moon\new_moon.cpp(91,20): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\dan03\OneDrive\Рабочий стол\homework\cpp\new_moon\new_moon\new_moon.cpp(116,20): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\dan03\OneDrive\Рабочий стол\homework\cpp\new_moon\new_moon\new_moon.cpp(70): warning C4715: get_count_of_month: значение возвращается не при всех путях выполнения
-  new_moon.vcxproj -> C:\Users\dan03\OneDrive\Рабочий стол\homework\cpp\new_moon\Debug\new_moon.exe
+C:\Users\dan03\Desktop\homework\cpp\new_moon\new_moon\new_moon.cpp(15,20): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\dan03\Desktop\homework\cpp\new_moon\new_moon\new_moon.cpp(79,20): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\dan03\Desktop\homework\cpp\new_moon\new_moon\new_moon.cpp(92,20): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\dan03\Desktop\homework\cpp\new_moon\new_moon\new_moon.cpp(117,20): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\dan03\Desktop\homework\cpp\new_moon\new_moon\new_moon.cpp(232,14): warning C4244: инициализация: преобразование "clock_t" в "float", возможна потеря данных
+C:\Users\dan03\Desktop\homework\cpp\new_moon\new_moon\new_moon.cpp(296,12): warning C4244: инициализация: преобразование "clock_t" в "float", возможна потеря данных
+C:\Users\dan03\Desktop\homework\cpp\new_moon\new_moon\new_moon.cpp(71): warning C4715: get_count_of_month: значение возвращается не при всех путях выполнения
+  new_moon.vcxproj -> C:\Users\dan03\Desktop\homework\cpp\new_moon\Debug\new_moon.exe

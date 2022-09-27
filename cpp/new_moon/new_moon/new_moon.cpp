@@ -1,6 +1,7 @@
 ﻿#include <fstream>
 #include <iostream>
 #include <string>
+#include <time.h>
 
 using namespace std;
 
@@ -228,6 +229,8 @@ int main()
 	cin >> buf;
 	cout << endl;
 
+	float start = clock();
+
 	string filename = "new_files/new_moon" + buf.substr(0, 4) + ".bin";
 	ifstream in(filename, ios::binary);
 
@@ -260,13 +263,8 @@ int main()
 		values.read(in);
 		//values.print();
 		if (not_started) {
-			values.print();
-			while (day_f != values.day || month_f != values.month) {
-				//values.print();
+			while (day_f != values.day) {
 				values.read(in);
-				if (in.eof()) {
-					return -1;
-				}
 			}
 			not_started = false;
 		}
@@ -284,7 +282,8 @@ int main()
 
 		if (values.el > max_el_values.el)
 			max_el_values = values;
-
+		if (in.eof())
+			break;
 		counter += 1;
 	}
 
@@ -293,6 +292,10 @@ int main()
 	cout << "Зенит луны в : " << set_time(max_el_values.seconds) << ", высота луны : " <<  max_el_values.el << endl;
 	cout << "Закат луны в : " << set_time(sunset.seconds - step / 2) << ' ' << sunset.el << endl;
 	cout << "Восход луны в : " << set_time(sunrise.seconds - step / 2) << ' ' << sunrise.el << endl;
+
+	float end = clock();
+
+	cout << (end - start) / 1000 << endl;
 
 	in.close();
 	return 10;

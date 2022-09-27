@@ -135,7 +135,7 @@ int count_bytes_to_move(int month, int day, int step) {
 }
 
 int get_time(string str) {
-	int hours = get_data_int(str, 8, 2);
+	int hours = get_data_int(str, 9, 2);
 	int minuts = get_data_int(str, 11, 2);
 	return get_data_int(str, 13, 2) + minuts * 60 + hours * 60 * 60;
 }
@@ -225,7 +225,7 @@ int main()
 
 		while (getline(in, buf).good()) {
 			data_set data(buf);
-			data.print();
+			//data.print();
 			data.write(out);
 		}
 

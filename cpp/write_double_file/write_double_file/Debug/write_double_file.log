@@ -1,8 +1,8 @@
 ﻿  write_double_file.cpp
-C:\Users\dan03\OneDrive\Рабочий стол\homework\cpp\write_double_file\write_double_file\write_double_file.cpp(14,20): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\dan03\OneDrive\Рабочий стол\homework\cpp\write_double_file\write_double_file\write_double_file.cpp(71,20): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\dan03\OneDrive\Рабочий стол\homework\cpp\write_double_file\write_double_file\write_double_file.cpp(84,20): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\dan03\OneDrive\Рабочий стол\homework\cpp\write_double_file\write_double_file\write_double_file.cpp(109,20): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\dan03\OneDrive\Рабочий стол\homework\cpp\write_double_file\write_double_file\write_double_file.cpp(215,7): warning C4101: space_buf: неиспользованная локальная переменная
-C:\Users\dan03\OneDrive\Рабочий стол\homework\cpp\write_double_file\write_double_file\write_double_file.cpp(63): warning C4715: get_count_of_month: значение возвращается не при всех путях выполнения
-  write_double_file.vcxproj -> C:\Users\dan03\OneDrive\Рабочий стол\homework\cpp\write_double_file\Debug\write_double_file.exe
+C:\Users\dan03\Desktop\homework\cpp\write_double_file\write_double_file\write_double_file.cpp(14,20): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\dan03\Desktop\homework\cpp\write_double_file\write_double_file\write_double_file.cpp(71,20): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\dan03\Desktop\homework\cpp\write_double_file\write_double_file\write_double_file.cpp(84,20): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\dan03\Desktop\homework\cpp\write_double_file\write_double_file\write_double_file.cpp(109,20): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\dan03\Desktop\homework\cpp\write_double_file\write_double_file\write_double_file.cpp(215,7): warning C4101: space_buf: неиспользованная локальная переменная
+C:\Users\dan03\Desktop\homework\cpp\write_double_file\write_double_file\write_double_file.cpp(63): warning C4715: get_count_of_month: значение возвращается не при всех путях выполнения
+  write_double_file.vcxproj -> C:\Users\dan03\Desktop\homework\cpp\write_double_file\Debug\write_double_file.exe
