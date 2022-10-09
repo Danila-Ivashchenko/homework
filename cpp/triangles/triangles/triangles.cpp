@@ -1,12 +1,15 @@
 ﻿#include <iostream>
+#include <fstream>
 #include "geometry.h"
+#include "file.h"
 
+using namespace std;
 
 int main()
 {
     Point test_p;
-    std::cin >> test_p;
-    std::cout << test_p;
+    cin >> test_p;
+    cout << test_p << ' ' << test_p;
 
-    return 0;
+    return 10;
 }
