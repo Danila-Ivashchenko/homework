@@ -58,6 +58,8 @@ def coding(mess, public_key):
 	e, n = public_key[0], public_key[1]
 	coded_mess = ""
 	for letter in mess:
+		if letter == '\n':
+			continue
 		if ord(letter) < n:
 			coded_mess += str(ord(letter) ** e % n) + ' '
 	return coded_mess[:-1]
@@ -84,7 +86,6 @@ def commands(privat_key, public_key):
 		print(coded_mess)
 	elif command == 2:
 		coded_mess = input("Введите сообщение: ").split(' ')
-		print(coded_mess)
 		mess = decoding(coded_mess, privat_key)
 		print(mess)
 	elif command == 3:
