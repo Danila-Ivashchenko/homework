@@ -7,9 +7,9 @@ using namespace std;
 
 int main()
 {
-    ifstream file("tests/test2.txt");
+    ifstream file("tests/test3.txt");
     if (!file.is_open()) return -1;
-    int points_num = 36;
+    int points_num = 8;
     Point* points = new Point[points_num];
     Triangle tr, max_trs[3];
     double max_area = 0;
@@ -34,7 +34,7 @@ int main()
         }
     }
 
-    ofstream outf("output.txt");
+    ofstream outf("output3.txt");
     
     for (auto tr : max_trs) {
         outf << tr << endl;

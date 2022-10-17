@@ -1,0 +1,4 @@
+﻿  class.cpp
+C:\Users\dan03\Desktop\homework\cpp\numbers\numbers\class.cpp(58): warning C4172: возвращение адреса локальной или временной переменной : new_r
+C:\Users\dan03\Desktop\homework\cpp\numbers\numbers\class.cpp(52): warning C4172: возвращение адреса локальной или временной переменной : new_r
+  numbers.vcxproj -> C:\Users\dan03\Desktop\homework\cpp\numbers\Debug\numbers.exe
