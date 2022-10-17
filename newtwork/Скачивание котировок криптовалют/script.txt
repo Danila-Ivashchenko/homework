@@ -1,0 +1,8 @@
+for val in "USD" "EUR" "RUB" "JPY" "KWD" "BHD" "OMR" "JOD" "GBP" "CHF" "BMD"
+
+do
+begin="https://min-api.cryptocompare.com/data/price?fsym="
+end="&tsyms=BTC,ETH,USDT,EUR,SOL,RUB"
+wget  "$begin$val$end" -O $val.json -b
+
+done
