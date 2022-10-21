@@ -1,7 +1,7 @@
 #include "class.h"
 
 int nod(int a, int b) {
-	if (a == 0 || b == 0)
+	if (a == 0 || b == 0 || a == 1 || b == 1)
 		return 1;
 	if (a < 0)
 		a *= -1;
@@ -26,8 +26,8 @@ Rational::Rational(int a, int b) {
 }
 
 Rational::Rational(int a) {
-	numer = 1;
-	denom = a;
+	numer = a;
+	denom = 1;
 }
 
 Rational Rational::operator - () const {
@@ -225,8 +225,53 @@ bool operator >=(const Rational& r1, const Rational& r2) {
 	return r1 == r2 || r1 > r2;
 }
 
+bool operator ==(const Rational& r1, const int& r2) {
+	Rational r_n = r2;
+	return r1 == r_n;
+}
+bool operator !=(const Rational& r1, const int& r2) {
+	Rational r_n = r2;
+	return r1 != r_n;
+}
+bool operator <(const Rational& r1, const int& r2) {
+	if (r2 == INT_MAX)
+		return true;
+	Rational r_n = r2;
+	return r1 < r_n;
+}
+bool operator >(const Rational& r1, const int& r2) {
+	if (r2 == INT_MAX)
+		return false;
+	Rational r_n = r2;
+	return r1 > r_n;
+}
+bool operator <=(const Rational& r1, const int& r2) {
+		return true;
+	Rational r_n = r2;
+	return r1 <= r_n;
+}
+bool operator >=(const Rational& r1, const int& r2) {
+	Rational r_n = r2;
+	return r1 >= r_n;
+}
+
 Rational operator +(const int& i_n, const Rational& r_n) {
 	Rational new_r = r_n;
 	new_r += i_n;
 	return new_r;
 }
+
+Rational operator -(const int& i_n, const Rational& r_n) {
+	Rational new_r = r_n;
+	return -(new_r - i_n);
+}
+Rational operator *(const int& i_n, const Rational& r_n) {
+	Rational new_r = r_n;
+	return new_r * i_n;
+}
+Rational operator /(const int& i_n, const Rational& r_n) {
+	Rational new_r = r_n;
+	new_r.flip();
+	return new_r * i_n;
+}
+

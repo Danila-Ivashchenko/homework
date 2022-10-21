@@ -8,6 +8,8 @@ using namespace std;
 int nod(int a, int b);
 
 class Rational {
+	friend Rational sqr_t(Rational& n);
+
 	private:
 		int numer, denom;
 		void simplify();
@@ -55,10 +57,21 @@ class Rational {
 	friend bool operator <=(const Rational& r1, const Rational& r2);
 	friend bool operator >=(const Rational& r1, const Rational& r2);
 
+	friend bool operator ==(const Rational& r1, const int& r2);
+	friend bool operator !=(const Rational& r1, const int& r2);
+	friend bool operator <(const Rational& r1, const int& r2);
+	friend bool operator >(const Rational& r1, const int& r2);
+	friend bool operator <=(const Rational& r1, const int& r2);
+	friend bool operator >=(const Rational& r1, const int& r2);
+
 	friend ostream& operator << (ostream& out, const Rational& n);
 	friend istream& operator >> (istream& in, Rational& n);
 	friend Rational operator +(const int& i_n,const Rational& r_n);
+	friend Rational operator -(const int& i_n, const Rational& r_n);
+	friend Rational operator *(const int& i_n, const Rational& r_n);
+	friend Rational operator /(const int& i_n, const Rational& r_n);
 };
+
 
 
 
