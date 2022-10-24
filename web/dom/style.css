@@ -1,0 +1,35 @@
+body{
+	padding: 0;
+	margin: 0;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+form{
+	border: 1px solid black;
+	max-width: 400px;
+	padding: 20px;
+	display: flex;
+	justify-content: space-evenly;
+}
+
+input[type="text"]{
+	max-width: 30px;
+	height: 30px;
+	text-align: center;
+}
+
+.info{
+	display: block;
+	width: 400px;
+	padding: 20px;
+	border: 1px solid black;
+	text-align: center;
+}
+
+.sub_info{
+	display: none;
+	width: 400px;
+	padding: 20px;
+	border: 1px solid black;
+	text-align: center;
+}
