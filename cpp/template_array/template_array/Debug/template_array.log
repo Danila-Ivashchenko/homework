@@ -1,0 +1,4 @@
+﻿  template_array.cpp
+template_array.obj : error LNK2019: ссылка на неразрешенный внешний символ "public: __thiscall Array<int>::Array<int>(int const &)" (??0?$Array@H@@QAE@ABH@Z) в функции _main.
+template_array.obj : error LNK2019: ссылка на неразрешенный внешний символ "public: __thiscall Array<int>::~Array<int>(void)" (??1?$Array@H@@QAE@XZ) в функции _main.
+C:\Users\dan03\Desktop\homework\cpp\template_array\Debug\template_array.exe : fatal error LNK1120: неразрешенных внешних элементов: 2

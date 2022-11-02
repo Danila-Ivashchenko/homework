@@ -144,13 +144,15 @@ function prosess(){
 	const days = parseInt(hours / 24)
 
 	let mess = ""
-	if (birthday.getFullYear() == now.getFullYear() && birthday.getMonth() == now.getMonth() && birthday.getDate() == now.getDate()){
+	if (isSameYear && birthday.getMonth() == now.getMonth() && birthday.getDate() == now.getDate()){
 		mess = "День Рождения сегодня!!!"
 		document.getElementById(infoP).innerHTML = mess
 		document.getElementById(subinfoP).remove()
 		return
 	} else if (isSameYear){
-		if (get_week(birthday) == get_week(now)){
+		if (birthday.getMonth() == now.getMonth() && birthday.getDate() == now.getDate() + 1){
+			mess = `Др завтра!`
+		} else if (get_week(birthday) == get_week(now)){
 			mess = `Др на этой неделе`
 		} else if (get_week(birthday) == get_week(now) + 1) {
 			mess = `Др на следующей неделе`
