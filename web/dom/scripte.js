@@ -96,7 +96,6 @@ function prosess(){
 	const input = document.getElementById(inputID)
 	const select = document.getElementById(selectID)
 
-	
 	if (document.getElementById(infoP) == null){
 		createParagraph(infoP, "info")
 	}
