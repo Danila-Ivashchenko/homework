@@ -95,9 +95,9 @@ int Array::getSize() {
 
 ostream& operator <<(ostream& out, const Array& arr)
 {
-	out << "Total size: " << arr.size << endl;
+	//out << "Total size: " << arr.size << endl;
 	for (int i = 0; i < arr.size; i++)
-		out << arr.ptr[i] << endl;
+		out << arr.ptr[i] << " ";
 	return out;
 }
 

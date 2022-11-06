@@ -18,6 +18,8 @@ void iosif(const int& k,const int& n, Array& arr) {
         //cout << arr[pos] << endl;
         arr.remove(pos);
         pos = (pos + k - 1) % arr.getSize();
+        //cout << "array - " << arr << endl;
+        //cout << pos << endl;
     }
     double end = clock();
     cout << "n = " << n << ", time = " << (end - start) / 1000 << endl;
@@ -46,9 +48,9 @@ int main()
             else
                 n *= 5;
         }
-        //full_iosif(k, n);
+        full_iosif(k, n);
         double start = clock();
-        cout << "n = " << n << ", answer = " << iosif_by_id(k, n) << ", time = " << (start - clock()) / 1000 << endl;
+        cout << "n = " << n << ", answer = " << iosif_by_id(k, n) << ", time = " << (clock() - start) / 1000 << endl;
     }
 
     return 10;

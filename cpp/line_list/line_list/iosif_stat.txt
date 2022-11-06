@@ -1,0 +1,7 @@
+n = 1000, answer = 977, time = 0
+n = 5000, answer = 1809, time = 0.001
+n = 10000, answer = 3617, time = 0.001
+n = 50000, answer = 34465, time = 0.004
+n = 100000, answer = 68929, time = 0.009
+n = 500000, answer = 475713, time = 0.053
+n = 1000000, answer = 951425, time = 0.11
