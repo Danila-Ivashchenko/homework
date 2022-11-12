@@ -116,18 +116,11 @@ LineListElement<T>* LineList<T>::getLast() {
 template <class T>
 void LineList<T>::insertFirst( const T& data)
 {
-	if (!start || last) {
-		LineListElement<T>* second = start;
-		start = new LineListElement<T>(data, second);
-		if (!last)
-			last = start;
-		size += 1;
-	}
-	else if (!last) {
+	LineListElement<T>* second = start;
+	start = new LineListElement<T>(data, second);
+	if (!last)
 		last = start;
-		start = new LineListElement<T>(data, last);
-		size += 1;
-	}
+	size += 1;
 }
 
 template <class T>

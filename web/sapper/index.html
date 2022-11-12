@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		.field{
+			margin: auto;
+			display: flex;
+			flex-wrap: wrap;
+			border: 1px solid black;
+		}
+		.cell{
+			width: 50px;
+			height: 50px;
+			border: 1px solid black;
+			box-sizing: border-box;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		.bomb{
+			background-color: red;
+		}
+		.Defused{
+			background-color: #555;
+		}
+		.boom{
+			background-color: black;
+		}
+		.Bad_defused{
+			background-color: rgb(36, 6, 6);
+		}
+	</style>
+</head>
+<body>
+	<div class="menu">
+		<div><span class="bomb_display"></span></div>
+		<button onclick="restart()">Рестарт</button>
+		<div class="size_menu">
+			<input type="number" id="row_num">
+			<input type="number" id="col_num">
+			<input type="number" id="bomb_num">
+			<button onclick="resize()">Изменить размер</button>
+		</div>
+	</div>
+	<div class="field"></div>
+	<script src="app.js"></script>
+</body>
+</html>

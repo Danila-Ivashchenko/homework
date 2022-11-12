@@ -47,20 +47,27 @@ int main()
 
     int n = 1000, k = 2;
    
-    for (int i = 0; i < 7; i++) {
-         LineList <int> a;
-         if (i > 0) {
-             if (i % 2 == 0)
-                 n *= 2;
-             else
-                 n *= 5;
-         };
-         double start = clock();
-         /*a.fillList(n);
-         cout << "n = " << n << ", answer = " << *a.iosif(n, k) << ", time = " << (clock() - start) / 1000 << endl;
-         start = clock();*/
-         cout << "n = " << n << ", answer = " << iosif(n, k) << ", time = " << (clock() - start) / 1000 << endl;
-     }
+    //for (int i = 0; i < 7; i++) {
+    //     LineList <int> a;
+    //     if (i > 0) {
+    //         if (i % 2 == 0)
+    //             n *= 2;
+    //         else
+    //             n *= 5;
+    //     };
+    //     double start = clock();
+    //     /*a.fillList(n);
+    //     cout << "n = " << n << ", answer = " << *a.iosif(n, k) << ", time = " << (clock() - start) / 1000 << endl;
+    //     start = clock();*/
+    //     cout << "n = " << n << ", answer = " << iosif(n, k) << ", time = " << (clock() - start) / 1000 << endl;
+    // }
+
+	LineList <char> a;
+	a.insertFirst('s');
+
+	cout << *a.getStart() << " = *" << a.getStart() << " " << &*a.getStart();
+
+
 
 
 

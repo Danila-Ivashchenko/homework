@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		.grid {
+			display: flex;
+			flex-wrap: wrap;
+			width: 800px;
+			margin-top: 20px;
+		}
+		.grid .checked {
+			opacity: .15;
+		}
+		.grid div img {
+			position: absolute;
+			top: 10px;
+			left: 10px;
+			width: 100px;
+			height: 100px;
+			border: 2px solid #2b2b2b;
+			margin: 8px;
+			transition: all .3s ease;	/* Анимация */
+		}
+		.grid div img.checking{
+			top: -5px;
+			left: 10px;
+			transition: all .3s ease; /* Анимация */
+		}
+		.stash{
+			/*border: 2px solid #2b2b2b;*/
+			position: relative;
+			width: 140px;
+			height: 140px;
+		}
+	</style>
+</head>
+<body>
+	<div>
+		<span>Побед:</span>
+		<span class="score"></span>
+	</div>
+	<div>
+		<input type="text" id="size">
+		<button onclick="resize()">Изменить количество пар</button>
+	</div>
+	<button onclick="restart()" class="but">Новая игра</button>
+	<div class="grid"></div>
+	<script src="script.js"></script>
+</body>
+</html>
