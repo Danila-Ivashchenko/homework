@@ -38,12 +38,9 @@ function compareNumeric(a, b) {
 	if (a < b) return -1;
   }
 
-//const field = document.createElement('div')
 const field = document.querySelector('.field')
 field.classList.add('field')
 const bomb_display = document.querySelector('.bomb_display')
-
-//document.body.appendChild(field)
 
 let set_cells = []
 let real_cells = []
@@ -58,21 +55,15 @@ function generate_bombs(count, field_size){
 	let positions = []
 	for (let i = 0; i < field_size; i++)
 		positions.push(i)
-	//console.log(positions)
 	let len = field_size - 1
 	while (count){
 		let rand_pos = get_randomInt(len)
-		//console.log(rand_pos)
-		//console.log(count, len)
 		bombs_positions.push(positions[rand_pos])
 		let buf = positions[rand_pos]
 		positions[rand_pos] = positions[len]
 		positions[len] = buf
-		//console.log(positions)
-		//bombs_positions.push(rand_pos)
 		count -= 1
 		len -= 1
-		//console.log(bombs_positions)
 	}
 }
 
@@ -92,23 +83,17 @@ field.addEventListener('contextmenu', (e) => {
 		defused_cells.push(i * COL_NUM + j)
 		if (parseInt(bomb_display.innerText) != 0) bomb_display.innerText = parseInt(bomb_display.innerText) - 1
 	}
-
-	// bombs_positions.sort(compareNumeric)
-	// defused_cells.sort(compareNumeric)
-	// console.log(bombs_positions, defused_cells)
 	if (bombs_positions.length == defused_cells.length)
 		check_end()
 }, false)
 
 function check_end(){
-	//console.log('sds')
+	console.log('sds')
 	bombs_positions.sort(compareNumeric)
 	defused_cells.sort(compareNumeric)
-	//console.log(bombs_positions, defused_cells)
-
 	for (let i = 0; i < BOMB_NUM; i++){
 		if (bombs_positions[i] != defused_cells[i]){
-			//console.log(bombs_positions[i], defused_cells[i])
+			console.log(bombs_positions[i], defused_cells[i])
 			return false
 		}
 	}
@@ -116,16 +101,13 @@ function check_end(){
 		for (let j = 0; j < COL_NUM; j++){
 			let cell = document.querySelector(`[i="${i}"][j="${j}"]`)
 			if (cell.classList.contains('Defused') && bombs_positions.indexOf(j + i * COL_NUM) == -1){
-				//console.log(cell, bombs_positions.indexOf(j + i * COL_NUM))
 				return false
 			}
-			if (cell.innerHTML == "" && !cell.classList.contains('Defused')){
-				//console.log(cell, 'ыы')
+			if (!cell.classList.contains('Defused') && !cell.classList.contains('Opened')){
 				return false
 			}
 		}
 	}
-	//restart()
 	show_bombs()
 	alert('Победа')
 }
@@ -155,13 +137,11 @@ function lose(){
 }
 
 function open_cell(i, j){
-	//console.log(i, j)
 	let target = document.querySelector(`[i="${i}"][j="${j}"]`)
 	if (set_cells[i][j] == '*'){
 		target.classList.add('boom')
 		lose()
 		return
-		//restart()
 	}
 	if (target.classList.contains('Opened')) return
 
@@ -194,6 +174,10 @@ function open_cell(i, j){
 		  break
 	  }
 	target.classList.add('Opened')
+	if (bombs_positions.length == defused_cells.length){
+		check_end()
+		console.log(bombs_positions, defused_cells)
+	}
 	if (set_cells[i][j] == 0){
 		target.innerHTML = ''
 		if (i > 0){
@@ -231,9 +215,7 @@ function open_cell(i, j){
 function define_cells(row_num, col_num){
 	for (let i = 0; i < row_num; i++){
 		for (let j = 0; j < col_num; j++){
-			//console.log(set_cells[i][j])
 			if (set_cells[i][j] == 0){
-				//console.log(set_cells)
 				if (i > 0) 
 					if (set_cells[i - 1][j] == '*')
 						set_cells[i][j] += 1
@@ -259,43 +241,32 @@ function define_cells(row_num, col_num){
 					if (set_cells[i + 1][j + 1] == '*')
 						set_cells[i][j] += 1
 			}
-			//if (set_cells[i][j] != '*')
-			//real_cells[i][j].innerHTML = '<span>' + set_cells[i][j] + '</span>'
 		}
 	}
-	//console.log(set_cells)
 }
 
 function fill_field(row_num, col_num, bombs){
 	generate_bombs(bombs, row_num * col_num)
-	//console.log(bombs_positions)
 	let counter = 0
 	for (let i = 0; i < row_num; i++){
 		let buf = []
-		//let bufr = []
 		for (let j = 0; j < col_num; j++){
 			let pos = -1
 			const cell = document.createElement('div')
 			cell.classList.add('cell')
 			if (bombs_positions.indexOf(j + i * COL_NUM, 0) >= 0){
-				//cell.classList.add('bomb')
 				buf[j] = '*'
 			} else {
 				buf[j] = 0
 			}
 			cell.setAttribute('i', i)
 			cell.setAttribute('j', j)
-			//cell.addEventListener('click', open_cell())
 			field.appendChild(cell)
-			//bufr.push(cell)
 			counter += 1
 		}
 		set_cells.push(buf)
-		//real_cells.push(bufr)
 	}
 	define_cells(row_num, col_num)
-	//console.log(set_cells)
-	//console.log(real_cells)
 	field.style.height = `${row_num * 50}px`
 	field.style.width = `${col_num * 50}px`
 }
@@ -308,7 +279,6 @@ function flip(e){
 		}
 		let i = parseInt(target.getAttribute('i'))
 		let j = parseInt(target.getAttribute('j'))
-		//console.log(i, j, target)
 		open_cell(i, j)
 		if (bombs_positions.length == defused_cells.length)
 			check_end()
@@ -318,6 +288,9 @@ function start(){
 	fill_field(ROW_NUM, COL_NUM, BOMB_NUM)
 	bomb_display.innerText = BOMB_NUM
 	field.addEventListener('click', flip)
+	document.querySelector('#row_num').value = ROW_NUM
+	document.querySelector('#col_num').value = COL_NUM
+	document.querySelector('#bomb_num').value = BOMB_NUM
 }
 
 function restart(){
