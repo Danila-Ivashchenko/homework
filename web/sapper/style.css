@@ -1,0 +1,129 @@
+body{
+	background-color: rgb(44, 41, 49);
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: 700;
+	color: white;
+}
+
+.inner{
+	position: relative;
+	display: flex;
+	justify-content: center;
+	padding: 100px;
+}
+
+.field{
+	display: flex;
+	flex-wrap: wrap;
+	border: 1px solid black;
+	font-weight: 700;
+}
+
+.field .cell:hover{
+	background-color: #3f3f3f;
+	transition: background-color .2s ease;
+}
+
+.cell{
+	width: 50px;
+	height: 50px;
+	box-sizing: border-box;
+	background-color: #525252;
+	box-shadow: inset 1px 1px 2px white, inset -1px -1px 2px black;
+	transition: background-color .2s ease;
+}
+.bomb{
+	/* background-color: red; */
+	background-image: url('images/mine_2.png');
+	background-size: 40px 40px;
+	background-position: center;
+	background-repeat: no-repeat;
+
+	position: relative;
+}
+.Defused{
+	background-image: url('images/flag.png');
+	background-size: 40px 40px;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+.boom{
+	background-image: url('images/boom.png');
+	background-size: 40px 40px;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.Bad_defused{
+	background-image: url('images/flag.png');
+	background-size: 40px 40px;
+	background-position: center;
+	background-repeat: no-repeat;
+	border: 2px solid red;
+}
+.Opened{
+	background-color: #57595e66;
+    color: white;
+    font-size: 20px;
+    box-shadow: inset 1px 1px 1px black, inset -1px -1px 1px black;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+button{
+	width: 200px;
+	height: 30px;
+	border-radius: 10px;
+	background-color: rgb(44, 41, 49);
+	font-size: 16px;
+	color: white;
+	border: 2px solid white;
+	transition: all .2s ease;
+}
+
+button:hover{
+	background-color: rgb(54, 50, 54);
+	transition: all .2s ease;
+}
+
+.menu{
+	position: absolute;
+	top: 100px;
+	left: 100px;
+}
+
+.size_menu {
+	display: flex;
+	flex-direction: column;
+	max-width: 300px;
+	border: 3px solid rgb(255, 255, 255);
+	border-radius: 20px;
+	padding: 10px;
+	margin-bottom: 10px;
+}
+
+.size_menu input{
+	max-width: 280px;
+	margin: 10px 0;
+	height: 30px;
+	border: 2px solid white;
+	border-radius: 10px;
+	background-color: rgba(0, 0, 0, 0);
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	color: white;
+}
+
+.size_menu input:focus{
+	outline: 0;
+}
+
+.size_menu button{
+	margin: 10px 0;
+}
+
+.display{
+	margin-bottom: 10px;
+	font-size: 24px;
+}

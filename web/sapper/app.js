@@ -43,7 +43,7 @@ const field = document.querySelector('.field')
 field.classList.add('field')
 const bomb_display = document.querySelector('.bomb_display')
 
-document.body.appendChild(field)
+//document.body.appendChild(field)
 
 let set_cells = []
 let real_cells = []
@@ -148,33 +148,54 @@ function show_bombs(){
 	}
 }
 
-field.addEventListener('click', function(e){
-	if (e.target.tagName != 'DIV') return
-	let target = e.target
-	if (target.classList.contains('Defused')){
-		return
-	}
-	let i = parseInt(target.getAttribute('i'))
-	let j = parseInt(target.getAttribute('j'))
-	//console.log(i, j, target)
-	open_cell(i, j)
-	if (bombs_positions.length == defused_cells.length)
-		check_end()
-})
+function lose(){
+	console.log('lose')
+	field.removeEventListener('click', flip)
+	show_bombs()
+}
 
 function open_cell(i, j){
 	//console.log(i, j)
 	let target = document.querySelector(`[i="${i}"][j="${j}"]`)
-	if (target.classList.contains('Opened')) return
 	if (set_cells[i][j] == '*'){
 		target.classList.add('boom')
-		show_bombs()
+		lose()
+		return
 		//restart()
 	}
-	target.innerHTML = '<span>' + set_cells[i][j] + '</span>'
-	target.classList.add('Opened')
+	if (target.classList.contains('Opened')) return
 
+	target.innerHTML = '<span>' + set_cells[i][j] + '</span>'
+	switch(set_cells[i][j]) {
+		case 1:
+		  target.style.color = '#0B205E'
+		  break
+		case 2:
+			target.style.color = '#086B19'
+		  break
+		case 3:
+			target.style.color = '#FC404E'
+			break
+		case 4:
+			target.style.color = '#57050E'
+			break
+		case 5:
+			target.style.color = '#350309'
+			break
+		case 6:
+			target.style.color = '#FFB141'
+			break
+		case 7:
+			target.style.color = '#A66B15'
+			break
+		case 8:
+			target.style.color = '#CEBC00'
+			break
+		  break
+	  }
+	target.classList.add('Opened')
 	if (set_cells[i][j] == 0){
+		target.innerHTML = ''
 		if (i > 0){
 			open_cell(i - 1, j)
 		}
@@ -279,10 +300,24 @@ function fill_field(row_num, col_num, bombs){
 	field.style.width = `${col_num * 50}px`
 }
 
+function flip(e){
+		if (e.target.tagName != 'DIV') return
+		let target = e.target
+		if (target.classList.contains('Defused')){
+			return
+		}
+		let i = parseInt(target.getAttribute('i'))
+		let j = parseInt(target.getAttribute('j'))
+		//console.log(i, j, target)
+		open_cell(i, j)
+		if (bombs_positions.length == defused_cells.length)
+			check_end()
+}
 
 function start(){
 	fill_field(ROW_NUM, COL_NUM, BOMB_NUM)
 	bomb_display.innerText = BOMB_NUM
+	field.addEventListener('click', flip)
 }
 
 function restart(){
