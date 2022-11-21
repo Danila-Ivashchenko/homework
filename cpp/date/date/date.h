@@ -18,7 +18,7 @@ public:
 	int get_week_day();
 	int jdn();
 	void set_from_jdn(const int& ajdn);
-	void print(const string& format);
+	string format(const string& format);
 	void print();
 	Date next_easter();
 

@@ -26,28 +26,57 @@ Date::Date(string ddmmyy) {
 /* Вывод даты */
 
 //Вывод в формате не доделан
-//void Date::print(const string& format) {
-//	string new_str = "";
-//	int year_count = 0;
-//	int day_count = 0;
-//	int month_count = 0;
-//	for (auto c : format) {
-//		if (c == 'y' || c == 'Y')
-//			year_count += 1;
-//		if (c == 'd' || c == 'D')
-//			day_count += 1;
-//		if (c == 'm' || c == 'M')
-//			month_count += 1;
-//	}
-//
-//	for (auto c : format){
-//		if (c == 'd' || c == 'D') {
-//			day_count -= 1;
-//			new_str += char(day / (10 * )
-//		}
-//	}
-//	cout << day << " : " << month << " : " << year << endl;
-//}
+string Date::format(const string& format) {
+	string new_str = "";
+	int year_count = 0;
+	int n_year = 0;
+	int day_count = 0;
+	int month_count = 0;
+	int delta_year = 1;
+	for (auto c : format) {
+		if (c == 'y' || c == 'Y')
+			year_count += 1;
+		if (c == 'd' || c == 'D')
+			day_count += 1;
+		if (c == 'm' || c == 'M')
+			month_count += 1;
+	}
+	if (day_count != 2 || month_count != 2 || year_count > 4) {
+		return "bad_format";
+	}
+	for (int i = 0; i < year_count - 1; i++) {
+		delta_year *= 10;
+	}
+	n_year += year % (delta_year * 10);
+	for (auto c : format){
+		if (c == 'd' || c == 'D') {
+			if (day_count > 1)
+				new_str += char(day / (10 * (day_count - 1)) + '0');
+			else
+				new_str += char(day % (10 * day_count) + '0');
+			day_count--;
+		} else if (c == 'm' || c == 'M') {
+			if (month_count > 1)
+				new_str += char(month / (10 * (month_count - 1)) + '0');
+			else
+				new_str += char(month % (10 * month_count) + '0');
+			month_count--;
+		} else if (c == 'y' || c == 'Y') {
+			cout << n_year << " " << delta_year << " " << n_year / (delta_year) << endl;
+			if (year_count > 1)
+				new_str += char(n_year / (delta_year)+'0');
+			else
+				new_str += char(n_year % 10 + '0');
+			n_year %= delta_year;
+			delta_year /= 10;
+		}
+		else {
+			new_str += c;
+		}
+	}
+	return new_str;
+}
+
 
 void Date::print() {
 	cout << day << " : " << month << " : " << year << endl;
@@ -112,7 +141,6 @@ Date Date::next_easter() {
 		fm -= 31;
 		mm += 1;
 	}
-	cout << fm << " " << mm << " " << year << endl;
 	int b = (2 * (year % 4) + 4 * (year % 7) + 6 * pp + 6) % 7;
 	int f = pp + b;
 	int ed, em = 3;
