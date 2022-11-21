@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru-RU">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="app.js"></script>
+    <style>
+        .grid {
+            display: flex;
+            flex-wrap: wrap;
+            border: 2px solid black;
+        }
+
+        .grid > .invader {
+            background-color: brown;
+            border-radius: 50%;
+        }
+
+        .grid > .shooter {
+            background-color: rgb(29, 201, 138);
+        }
+
+        .grid > .bullet {
+            background-color: black;
+        }
+
+        .grid > .explosion{
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <div class="grid"></div>
+</body>
+</html>
