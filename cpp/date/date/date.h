@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include "time.h"
 
 using namespace std;
 
@@ -10,9 +11,10 @@ class Date {
 	int year;
 	double jd;
 	int JDN;
+	Time time;
 public:
 	Date(int ajdn);
-	Date(string ddmmyy);
+	Date(string timeStr, string format);
 	Date(int dd, int mm, int yy);
 	Date();
 	int get_week_day();
@@ -28,4 +30,6 @@ public:
 	Date& operator -=(const int& anum);
 
 	operator int() { return jdn(); };
+	friend ostream& operator << (ostream& out, const Date& date);
 };
+

@@ -16,10 +16,73 @@ Date::Date(int ajdn)
 	set_from_jdn(ajdn);
 }
 
-Date::Date(string ddmmyy) {
-	day = int(ddmmyy[0] - '0') * 10 + int(ddmmyy[1] - '0');
-	month = int(ddmmyy[3] - '0') * 10 + int(ddmmyy[4] - '0');
-	year = int(ddmmyy[6] - '0') * 1000 + int(ddmmyy[7] - '0') * 100 + int(ddmmyy[8] - '0') * 10 + int(ddmmyy[9] - '0');
+Date::Date(string timeStr, string format) {
+	int year_count = 0;
+	int n_year = 0;
+	int day_count = 0;
+	int month_count = 0;
+	int hour_count = 0;
+	int minut_count = 0;
+	int second_count = 0;
+	int delta_year = 1;
+	for (auto c : format) {
+		if (c == 'y' || c == 'Y')
+			year_count += 1;
+		if (c == 'd' || c == 'D')
+			day_count += 1;
+		if (c == 'M')
+			month_count += 1;
+		if (c == 's')
+			second_count += 1;
+		if (c == 'm')
+			minut_count += 1;
+		if (c == 'h')
+			hour_count += 1;
+	}
+	for (int i = 0; i < year_count - 1; i++) {
+		delta_year *= 10;
+	}
+	for (auto c : format) {
+		if (c == 'y' || c == 'Y') {
+			year += int(c + '0') * delta_year;
+			delta_year /= 10;
+		}
+		if (c == 'd' || c == 'D') {
+			if (day_count == 2)
+				day += int(c + '0') * (10);
+			else
+				day += int(c + '0');
+			day_count--;
+		}
+		if (c == 'M') {
+			if (month_count == 2)
+				month += int(c + '0') * (10);
+			else
+				month += int(c + '0');
+			month_count--;
+		}
+		if (c == 's') {
+			if (second_count == 2)
+				time.seconds += int(c + '0') * (10);
+			else
+				time.seconds += int(c + '0');
+			second_count--;
+		}
+		if (c == 'm') {
+			if (minut_count == 2)
+				time.minuts += int(c + '0') * (10);
+			else
+				time.minuts += int(c + '0');
+			minut_count--;
+		}
+		if (c == 'h') {
+			if (hour_count == 2)
+				time.hours += int(c + '0') * (10);
+			else
+				time.hours += int(c + '0');
+			hour_count--;
+		}
+	}
 	JDN = jdn();
 }
 
@@ -154,4 +217,11 @@ Date Date::next_easter() {
 
 	Date easter(ed, em, year);
 	return easter + 13;
+}
+
+
+/* Вывод даты */
+ostream& operator << (ostream& out, const Date& date) {
+	out << date.day / 10 << date.day % 10 << ":" << date.month / 10 << date.month % 10 << ":" << date.year << "T" << date.time;
+	return out;
 }
