@@ -42,6 +42,19 @@ function add_phone(){
 	inp_phone.id = "inp_phone_number_" + counter
 	inp_phone.type = "text"
 	settings_block.querySelector(".inp_phone_section").appendChild(inp_phone)
+	settings_block.querySelector("#dell_but").style.display = "inline-block"
+}
+
+function delete_phone(){
+	let counter = phone_section.querySelectorAll(".phone_number").length
+	if (counter == 1){
+		return
+	}
+	if (counter == 2){
+		settings_block.querySelector("#dell_but").style.display = "none"
+	}
+	phone_section.querySelector("#phone_number_" + counter).remove()
+	settings_block.querySelector("#inp_phone_number_" + counter).remove()
 }
 
 function generate(){
@@ -50,9 +63,13 @@ function generate(){
 	p_name.innerText = inp_p_name
 	p_name.style.textAlign = document.querySelector('input[name="inp_name_align"]:checked').value
 	p_name.style.fontSize = document.querySelector('input[name="inp_name_size"]:checked').value
+	p_name.style.color = document.querySelector('input[name="inp_name_color"]:checked').value
+	
 	position.innerText = inp_position
 	position.style.textAlign = document.querySelector('input[name="inp_position_align"]:checked').value
 	position.style.fontSize = document.querySelector('input[name="inp_position_size"]:checked').value
+	position.style.color = document.querySelector('input[name="inp_position_color"]:checked').value
+
 	for (let i = 1; i < phone_section.querySelectorAll(".phone_number").length + 1; i++){
 		phone_section.querySelector(`#phone_number_${i}`).innerText = settings_block.querySelector(`#inp_phone_number_${i}`).value
 	}

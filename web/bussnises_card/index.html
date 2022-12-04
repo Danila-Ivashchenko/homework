@@ -21,11 +21,11 @@
 					<input id="inp_name" type="text">
 					<div class="text_align_block">
 						<input type="radio" id="inp_name_align_1" name="inp_name_align" value="left">
-						<label for="inp_name_align_1">слева</label>
+						<label for="inp_name_align_1" class="align left"></label>
 						<input type="radio" id="inp_name_align_2" name="inp_name_align" value="center" checked>
-						<label for="inp_name_align_2">поцентру</label>
+						<label for="inp_name_align_2" class="align center"></label>
 						<input type="radio" id="inp_name_align_3" name="inp_name_align" value="right">
-						<label for="inp_name_align_3">спрва</label>
+						<label for="inp_name_align_3" class="align right"></label>
 					</div>
 					<div class="text_size_block">
 						<input type="radio" id="inp_name_size_1" name="inp_name_size" value="24px">
@@ -36,6 +36,20 @@
 						<label for="inp_name_size_3">28px</label>
 					</div>
 				</div>
+				<div class="text_color_block">
+					<input type="radio" id="inp_name_color_1" name="inp_name_color" value="#000000" checked>
+					<label for="inp_name_color_1" class="label_name_color" style="background-color: #000000;"></label>
+					<input type="radio" id="inp_name_color_2" name="inp_name_color" value="#1d4e97">
+					<label for="inp_name_color_2" class="label_name_color" style="background-color: #1d4e97;"></label>
+					<input type="radio" id="inp_name_color_3" name="inp_name_color" value="#a31842">
+					<label for="inp_name_color_3" class="label_name_color" style="background-color: #a31842;"></label>
+					<input type="radio" id="inp_name_color_4" name="inp_name_color" value="#228315">
+					<label for="inp_name_color_4" class="label_name_color" style="background-color: #228315;"></label>
+					<input type="radio" id="inp_name_color_5" name="inp_name_color" value="#a38e18">
+					<label for="inp_name_color_5" class="label_name_color" style="background-color: #a38e18;"></label>
+					<input type="radio" id="inp_name_color_6" name="inp_name_color" value="#a318a3">
+					<label for="inp_name_color_6" class="label_name_color" style="background-color: #a318a3;"></label>
+				</div>
 			</div>
 			<div class="line">
 				<label for="inp_position">Должность</label>
@@ -43,11 +57,11 @@
 						<input id="inp_position" type="text">
 						<div class="text_align_block">
 							<input type="radio" id="inp_pos_align_1" name="inp_position_align" value="left">
-							<label for="inp_pos_align_1">слева</label>
+							<label for="inp_pos_align_1" class="align left"></label>
 							<input type="radio" id="inp_pos_align_2" name="inp_position_align" value="center" checked>
-							<label for="inp_pos_align_2">поцентру</label>
+							<label for="inp_pos_align_2" class="align center"></label>
 							<input type="radio" id="inp_pos_align_3" name="inp_position_align" value="right">
-							<label for="inp_pos_align_3">справа</label>
+							<label for="inp_pos_align_3" class="align right"></label>
 						</div>
 						<div class="text_size_block">
 							<input type="radio" id="inp_pos_size_1" name="inp_position_size" value="24px">
@@ -58,14 +72,29 @@
 							<label for="inp_pos_size_3">28px</label>
 						</div>
 					</div>
+					<div class="text_color_block">
+						<input type="radio" id="inp_pos_color_1" name="inp_position_color" value="#000000" checked>
+						<label for="inp_pos_color_1" class="label_pos_color" style="background-color: #000000;"></label>
+						<input type="radio" id="inp_pos_color_2" name="inp_position_color" value="#252525">
+						<label for="inp_pos_color_2" class="label_pos_color" style="background-color: #252525;"></label>
+						<input type="radio" id="inp_pos_color_3" name="inp_position_color" value="#424242">
+						<label for="inp_pos_color_3" class="label_pos_color" style="background-color: #424242;"></label>
+						<input type="radio" id="inp_pos_color_4" name="inp_position_color" value="#757575">
+						<label for="inp_pos_color_4" class="label_pos_color" style="background-color: #757575;"></label>
+						<input type="radio" id="inp_pos_color_5" name="inp_position_color" value="#8f8f8f">
+						<label for="inp_pos_color_5" class="label_pos_color" style="background-color: #8f8f8f;"></label>
+						<input type="radio" id="inp_pos_color_6" name="inp_position_color" value="#d6d6d6">
+						<label for="inp_pos_color_6" class="label_pos_color" style="background-color: #d6d6d6;"></label>
+					</div>
 			</div>
 			<div class="line">
 				<label for="inp_phone_number">Телефон</label>
 				<div class="inp_phone_section">
 					<input id="inp_phone_number_1" type="text">
 				</div>
-				<div class="add_field">
-					<button onclick="add_phone()">+</button>
+				<div class="add_dell_field">
+					<button onclick="add_phone()" id="add_but"></button>
+					<button onclick="delete_phone()" id="dell_but"></button>
 				</div>
 			</div>
 			<div class="line">
@@ -88,7 +117,7 @@
 					</div>
 				</div>
 			</div>
-			<button onclick="generate()">Сгенерировать</button>
+			<button class="gen_but" onclick="generate()">Сгенерировать</button>
 		</div>
 
 
@@ -96,11 +125,13 @@
 			<div class="title_company"></div>
 			<div class="name"></div>
 			<div class="position"></div>
-			<div class="phone_section">
-				<div class="phone_number" id="phone_number_1"></div>
+			<div class="sub_info_sesction">
+				<div class="phone_section">
+					<div class="phone_number" id="phone_number_1"></div>
+				</div>
+				<div class="email"></div>
+				<div class="addres"></div>
 			</div>
-			<div class="email"></div>
-			<div class="addres"></div>
 		</div>
 
 
