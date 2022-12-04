@@ -1,6 +1,5 @@
 #include "date.h"
-
-
+#include "time.h"
 
 /* Конструкторы класса */
 
@@ -8,7 +7,22 @@ Date::Date(int dd, int mm, int yy) {
 	day = dd;
 	month = mm;
 	year = yy;
+	time.seconds = 0;
+	time.minuts = 0;
+	time.hours = 0;
 	JDN = jdn();
+	JD = jd();
+}
+
+Date::Date(int dd, int MM, int yy, int ss, int mm, int hh){
+	day = dd;
+	month = MM;
+	year = yy;
+	time.seconds = ss;
+	time.minuts = mm;
+	time.hours = hh;
+	JDN = jdn();
+	JD = jd();
 }
 
 Date::Date(int ajdn)
@@ -17,6 +31,12 @@ Date::Date(int ajdn)
 }
 
 Date::Date(string timeStr, string format) {
+	day = 0;
+	month = 0;
+	year = 0;
+	time.seconds = 0;
+	time.minuts = 0;
+	time.hours = 0;
 	int year_count = 0;
 	int n_year = 0;
 	int day_count = 0;
@@ -42,69 +62,110 @@ Date::Date(string timeStr, string format) {
 	for (int i = 0; i < year_count - 1; i++) {
 		delta_year *= 10;
 	}
-	for (auto c : format) {
+
+	int count = format.size();
+	for (int i = 0; i < count; i++) {
+		char c = format[i];
 		if (c == 'y' || c == 'Y') {
-			year += int(c + '0') * delta_year;
+
+			year += int(timeStr[i] - '0') * delta_year;
 			delta_year /= 10;
 		}
 		if (c == 'd' || c == 'D') {
 			if (day_count == 2)
-				day += int(c + '0') * (10);
+				day += int(timeStr[i] - '0') * (10);
 			else
-				day += int(c + '0');
+				day += int(timeStr[i] - '0');
 			day_count--;
 		}
 		if (c == 'M') {
 			if (month_count == 2)
-				month += int(c + '0') * (10);
+				month += int(timeStr[i] - '0') * (10);
 			else
-				month += int(c + '0');
+				month += int(timeStr[i] - '0');
 			month_count--;
 		}
 		if (c == 's') {
 			if (second_count == 2)
-				time.seconds += int(c + '0') * (10);
+				time.seconds += int(timeStr[i] - '0') * (10);
 			else
-				time.seconds += int(c + '0');
+				time.seconds += int(timeStr[i] - '0');
 			second_count--;
 		}
 		if (c == 'm') {
 			if (minut_count == 2)
-				time.minuts += int(c + '0') * (10);
+				time.minuts += int(timeStr[i] - '0') * (10);
 			else
-				time.minuts += int(c + '0');
+				time.minuts += int(timeStr[i] - '0');
 			minut_count--;
 		}
 		if (c == 'h') {
 			if (hour_count == 2)
-				time.hours += int(c + '0') * (10);
+				time.hours += int(timeStr[i] - '0') * (10);
 			else
-				time.hours += int(c + '0');
+				time.hours += int(timeStr[i] - '0');
 			hour_count--;
 		}
 	}
 	JDN = jdn();
+	JD = jdn();
 }
+
+/* Возврат значений */
+
+int Date::get_day() {
+	return day;
+}
+
+int Date::get_month() {
+	return month;
+}
+
+int Date::get_year() {
+	return year;
+}
+
+int Date::get_seconds() {
+	return time.seconds;
+}
+
+int Date::get_minuts() {
+	return time.minuts;
+}
+
+int Date::get_hours() {
+	return time.hours;
+}
+
 
 /* Вывод даты */
 
-//Вывод в формате не доделан
 string Date::format(const string& format) {
 	string new_str = "";
 	int year_count = 0;
 	int n_year = 0;
 	int day_count = 0;
 	int month_count = 0;
+	int minut_count = 0;
+	int second_count = 0;
+	int hour_count= 0;
 	int delta_year = 1;
 	for (auto c : format) {
 		if (c == 'y' || c == 'Y')
 			year_count += 1;
 		if (c == 'd' || c == 'D')
 			day_count += 1;
-		if (c == 'm' || c == 'M')
+		if (c == 'M')
 			month_count += 1;
+		if (c == 's')
+			second_count += 1;
+		if (c == 'm')
+			minut_count += 1;
+		if (c == 'h')
+			hour_count += 1;
 	}
-	if (day_count != 2 || month_count != 2 || year_count > 4) {
+	if ((day_count != 0 || month_count != 0 || year_count != 0) && (day_count != 2 || month_count != 2 || year_count > 4) &&
+		(second_count != 0 || minut_count != 0 || hour_count != 0) && (second_count != 2 || minut_count != 2 || hour_count != 2)) {
 		return "bad_format";
 	}
 	for (int i = 0; i < year_count - 1; i++) {
@@ -118,20 +179,38 @@ string Date::format(const string& format) {
 			else
 				new_str += char(day % (10 * day_count) + '0');
 			day_count--;
-		} else if (c == 'm' || c == 'M') {
+		} else if (c == 'M') {
 			if (month_count > 1)
 				new_str += char(month / (10 * (month_count - 1)) + '0');
 			else
 				new_str += char(month % (10 * month_count) + '0');
 			month_count--;
 		} else if (c == 'y' || c == 'Y') {
-			cout << n_year << " " << delta_year << " " << n_year / (delta_year) << endl;
 			if (year_count > 1)
 				new_str += char(n_year / (delta_year)+'0');
 			else
 				new_str += char(n_year % 10 + '0');
 			n_year %= delta_year;
 			delta_year /= 10;
+		} else if (c == 'm') {
+			if (minut_count > 1)
+				new_str += char(time.minuts / (10) + '0');
+			else
+				new_str += char(time.minuts % (10) + '0');
+			minut_count--;
+		} else if (c == 's') {
+			if (second_count > 1)
+				new_str += char(time.seconds / (10) + '0');
+			else
+				new_str += char(time.seconds % (10) + '0');
+			second_count--;
+		} else if (c == 'h') {
+			if (hour_count > 1) {
+				new_str += char(time.hours / 10 + '0');
+			}
+			else
+				new_str += char(time.hours % 10 + '0');
+			hour_count--;
 		}
 		else {
 			new_str += c;
@@ -155,6 +234,16 @@ int Date::jdn() {
 	return day + int((153 * m + 2) / 5) + 365 * y + int(y / 4) - y / 100 + y / 400 - 32045;
 }
 
+long double Date::jd() {
+	return JDN + double((double(time.hours) - 12) / 24) + double(time.minuts) / 1440 + double(time.seconds);
+}
+
+void Date::set_time(int ss, int mm, int hh) {
+	time.seconds = ss;
+	time.minuts = mm;
+	time.hours = hh;
+}
+
 void Date::set_from_jdn(const int& ajdn) {
 	int a = ajdn + 32044;
 	int b = (4 * a + 3) / 146097;
@@ -176,6 +265,13 @@ int Date::get_week_day() {
 
 Date Date::operator +(const int& anum) const {
 	Date new_date(JDN + anum);
+	new_date.set_time(time.seconds, time.minuts, time.hours);
+	return new_date;
+}
+
+Date Date::operator -(const int& anum) const {
+	Date new_date(JDN - anum);
+	new_date.set_time(time.seconds, time.minuts, time.hours);
 	return new_date;
 }
 
@@ -225,3 +321,10 @@ ostream& operator << (ostream& out, const Date& date) {
 	out << date.day / 10 << date.day % 10 << ":" << date.month / 10 << date.month % 10 << ":" << date.year << "T" << date.time;
 	return out;
 }
+
+
+ostream& operator << (ostream& out, const Time& time) {
+	out << time.seconds / 10 << time.seconds % 10 << ":" << time.minuts / 10 << time.minuts % 10 << ":" << time.hours / 10 << time.hours % 10;
+	return out;
+}
+

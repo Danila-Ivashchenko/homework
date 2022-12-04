@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="style.css">
+	<title>Document</title>
+</head>
+<body>
+	<div class="inner">
+		<div class="settings_block">
+			<h2>Конструктор визиток</h2>
+			<div class="line">
+				<label for="inp_title_company">Название организации</label>
+				<input id="inp_title_company" type="text">
+			</div>
+			<div class="line">
+				<label for="inp_name">Фамилия, имя, отчество</label>
+				<div class="value_and_properties">
+					<input id="inp_name" type="text">
+					<div class="text_align_block">
+						<input type="radio" id="inp_name_align_1" name="inp_name_align" value="left">
+						<label for="inp_name_align_1">слева</label>
+						<input type="radio" id="inp_name_align_2" name="inp_name_align" value="center" checked>
+						<label for="inp_name_align_2">поцентру</label>
+						<input type="radio" id="inp_name_align_3" name="inp_name_align" value="right">
+						<label for="inp_name_align_3">спрва</label>
+					</div>
+					<div class="text_size_block">
+						<input type="radio" id="inp_name_size_1" name="inp_name_size" value="24px">
+						<label for="inp_name_size_1">24px</label>
+						<input type="radio" id="inp_name_size_2" name="inp_name_size" value="26px" checked>
+						<label for="inp_name_size_2">26px</label>
+						<input type="radio" id="inp_name_size_3" name="inp_name_size" value="28px">
+						<label for="inp_name_size_3">28px</label>
+					</div>
+				</div>
+			</div>
+			<div class="line">
+				<label for="inp_position">Должность</label>
+					<div class="value_and_properties">
+						<input id="inp_position" type="text">
+						<div class="text_align_block">
+							<input type="radio" id="inp_pos_align_1" name="inp_position_align" value="left">
+							<label for="inp_pos_align_1">слева</label>
+							<input type="radio" id="inp_pos_align_2" name="inp_position_align" value="center" checked>
+							<label for="inp_pos_align_2">поцентру</label>
+							<input type="radio" id="inp_pos_align_3" name="inp_position_align" value="right">
+							<label for="inp_pos_align_3">справа</label>
+						</div>
+						<div class="text_size_block">
+							<input type="radio" id="inp_pos_size_1" name="inp_position_size" value="24px">
+							<label for="inp_pos_size_1">24px</label>
+							<input type="radio" id="inp_pos_size_2" name="inp_position_size" value="26px" checked>
+							<label for="inp_pos_size_2">26px</label>
+							<input type="radio" id="inp_pos_size_3" name="inp_position_size" value="28px">
+							<label for="inp_pos_size_3">28px</label>
+						</div>
+					</div>
+			</div>
+			<div class="line">
+				<label for="inp_phone_number">Телефон</label>
+				<div class="inp_phone_section">
+					<input id="inp_phone_number_1" type="text">
+				</div>
+				<div class="add_field">
+					<button onclick="add_phone()">+</button>
+				</div>
+			</div>
+			<div class="line">
+				<label for="inp_email">E-mail</label>
+				<div class="value_and_properties">
+					<input id="inp_email" type="text">
+					<div class="show_block">
+						<input type="checkbox" id="inp_show_email" value="block" checked>
+						<label for="inp_show_email">Отображать</label>
+					</div>
+				</div>
+			</div>
+			<div class="line">
+				<label for="inp_addres">Адрес</label>
+				<div class="value_and_properties">
+					<input id="inp_addres" type="text">
+					<div class="show_block">
+						<input type="checkbox" id="inp_show_addres" value="block" checked>
+						<label for="inp_show_addres">Отображать</label>
+					</div>
+				</div>
+			</div>
+			<button onclick="generate()">Сгенерировать</button>
+		</div>
+
+
+		<div class="card">
+			<div class="title_company"></div>
+			<div class="name"></div>
+			<div class="position"></div>
+			<div class="phone_section">
+				<div class="phone_number" id="phone_number_1"></div>
+			</div>
+			<div class="email"></div>
+			<div class="addres"></div>
+		</div>
+
+
+	</div>
+	<script src="app.js"></script>
+</body>
+</html>

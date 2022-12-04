@@ -48,6 +48,19 @@ function right_month_word(n){
 	}
 }
 
+function right_day_word(n){
+	switch (n % 10){
+		case 1:
+			return "день"
+		case 2:
+		case 3:
+		case 4:
+			return "дня"
+		default:
+			return "ней"
+	}
+}
+
 function creatInput(form){
 	const input = document.createElement('input')
 	input.setAttribute('type', 'text')
@@ -156,18 +169,20 @@ function prosess(){
 			mess = `Др на этой неделе`
 		} else if (get_week(birthday) == get_week(now) + 1) {
 			mess = `Др на следующей неделе`
-		} else if (birthday.getMonth() == now.getMonth() + 1) {
-			mess = `Через месяц`
+		} else if (birthday.getMonth() == now.getMonth()){
+			mess = `Др через ${birthday.getDate() - now.getDate()} ${right_day_word(birthday.getDate() - now.getDate())}`
 		} else if (birthday.getMonth() == now.getMonth() + 6) {
 			mess = `Через полгода`
 		}
 	} else {
-		if (birthday.getMonth() == now.getMonth() + 12){
+		if (birthday.getMonth() == now.getMonth()){
 			mess = `Др через год`
 		} else if (birthday.getMonth() == (now.getMonth() + 6) % 12){
 			mess = `Др через пол года`
+		} else if (birthday.getMonth() == (now.getMonth() + 1) % 12) {
+			mess = `Через месяц`
 		} else {
-			mess = `Др через ${birthday.getMonth() + (now.getMonth() + 6) % 12} ${right_month_word(birthday.getMonth() + (now.getMonth() + 6) % 12)}`
+			mess = `Др через ${(birthday.getMonth() + 1) + (now.getMonth() + 1) % 12} ${right_month_word((birthday.getMonth() + 1) + (now.getMonth() + 1) % 12)}`
 		}
 	}
 	document.getElementById(subinfoP).innerHTML = `Осталось до Дня Рождения: <b>${days != 0 ? days + 'д, ' : ''}</b> ${hours != 0 || days != 0 ? hours % 24 + 'ч.' : ''} ${minutes % 60}м. ${seconds % 60}сек.`

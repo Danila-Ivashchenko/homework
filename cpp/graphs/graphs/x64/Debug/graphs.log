@@ -1,3 +1,5 @@
-﻿  graphs.cpp
-C:\Users\dan03\OneDrive\Рабочий стол\homework\cpp\graphs\graphs\graphs.cpp(2,10): warning C4067: непредвиденные лексемы за директивой препроцессора, требуется newline
+﻿  Graph.cpp
+  graphs.cpp
+  Node.cpp
+  Создание кода...
   graphs.vcxproj -> C:\Users\dan03\OneDrive\Рабочий стол\homework\cpp\graphs\x64\Debug\graphs.exe

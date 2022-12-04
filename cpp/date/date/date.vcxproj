@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="date.cpp" />
     <ClCompile Include="date_realisation.cpp" />
+    <ClCompile Include="time_realisation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="date.h" />

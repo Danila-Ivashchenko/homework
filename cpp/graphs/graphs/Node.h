@@ -1,67 +1,52 @@
 #pragma once
 #include "Graph.h"
-#include <iostream>
+
 
 using namespace std;
 
+class Node;
 
-//class Node {
-//	std::string name;
-//	std::set<Node*> neighbours;
-//	void addNeighbour(Node* neighbour);
-//	void removeNeighbour(Node* neighbour);
-//public:
-//	Node(const std::string& aname) : name(aname) {}
-//	const std::string& getName() const { return name; }
-//	std::set<Node*>::const_iterator nb_begin() const {
-//		return neighbours.begin();
-//	}
-//	std::set<Node*>::const_iterator nb_end() const { return neighbours.end(); }
-//	friend class Graph;
-//};
-
+typedef set<Node*>::const_iterator node_iterator;
 class Node {
 	int name;
 	set<Node*> neighbours;
 	void addNeighbour(Node* neighbour);
 	void removeNeighbour(Node* neighbour);
 public:
-	Node(const int& aname) : name(aname) {}
-	Node() : name(0) {}
-	const int& getName() const { return name; }
-	set<Node*>::const_iterator nb_begin() const {
+	Node(const int& aname);
+	Node() : name(0) {};
+
+	node_iterator nb_begin() const {
 		return neighbours.begin();
-	}
-	set<Node*>::const_iterator nb_end() const { return neighbours.end(); }
-	void print_neighbours();
+	};
+	node_iterator nb_end() const { return neighbours.end(); }
 	Node(const Node& node) {
 		name = node.name;
-	}
+	};
 
+	void print_neighbours();
+	void write_neighbours(ofstream& outf);
+
+
+	friend bool operator == (Node fnode, Node snode) { return fnode.name == snode.name; };
+	friend bool operator < (Node fnode, Node snode) { return fnode.name < snode.name; };
 	friend class Graph;
 	friend ostream& operator <<(ostream& out, const Node& node);
+	friend ofstream& operator <<(ofstream& outf, const Node& node) {
+		outf << node.name;
+		return outf;
+	};
 	friend struct Edge;
 };
 
-void Node::addNeighbour(Node* neighbour) {
-	neighbours.insert(neighbour);
-}
-
-void Node::removeNeighbour(Node* neighbour) {
-	neighbours.erase(neighbour);
-}
-
-ostream& operator << (ostream& out, const Node& node) {
-	out << node.name << " ";
-	return out;
-}
-
-inline void Node::print_neighbours(){
-	for (set<Node*>::const_iterator it = nb_begin(); it != nb_end(); it++) {
-		cout << *this << " - " << **it << endl;
-	}
-	cout << endl;
-}
+struct Edge {
+	Node a;
+	Node b;
+	Edge(int aa, int ab) {
+		a.name = aa;
+		b.name = ab;
+	};
+};
 
 
 
