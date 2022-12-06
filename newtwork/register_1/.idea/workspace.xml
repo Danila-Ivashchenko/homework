@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="60698b1c-8e7e-4d2a-bc4b-ea9361db2c88" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../cpp/date/.vs/date/v16/.suo" beforeDir="false" afterPath="$PROJECT_DIR$/../../cpp/date/.vs/date/v16/.suo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../cpp/date/.vs/date/v16/Browse.VC.db" beforeDir="false" afterPath="$PROJECT_DIR$/../../cpp/date/.vs/date/v16/Browse.VC.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../cpp/date/.vs/date/v16/ipch/AutoPCH/12acb97d80de2594/DATE.ipch" beforeDir="false" afterPath="$PROJECT_DIR$/../../cpp/date/.vs/date/v16/ipch/AutoPCH/12acb97d80de2594/DATE.ipch" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../cpp/date/.vs/date/v16/ipch/AutoPCH/f4a9c96afd103a5e/DATE_REALISATION.ipch" beforeDir="false" afterPath="$PROJECT_DIR$/../../cpp/date/.vs/date/v16/ipch/AutoPCH/f4a9c96afd103a5e/DATE_REALISATION.ipch" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../cpp/date/date/Debug/date.log" beforeDir="false" afterPath="$PROJECT_DIR$/../../cpp/date/date/Debug/date.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../cpp/date/date/date.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../cpp/date/date/date.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../cpp/date/date/date.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../cpp/date/date/date.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../cpp/date/date/date_realisation.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../cpp/date/date/date_realisation.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../cpp/graphs/graphs/Node.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../cpp/graphs/graphs/Node.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../cpp/graphs/graphs/graphs.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../cpp/graphs/graphs/graphs.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../cpp/graphs/graphs/testgraph.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../cpp/graphs/graphs/x64/Debug/graphs.ilk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../cpp/graphs/graphs/x64/Debug/graphs.log" beforeDir="false" afterPath="$PROJECT_DIR$/../../cpp/graphs/graphs/x64/Debug/graphs.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../cpp/graphs/graphs/x64/Debug/graphs.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../cpp/graphs/graphs/x64/Debug/graphs.tlog/CL.command.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../cpp/graphs/graphs/x64/Debug/graphs.tlog/CL.read.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../cpp/graphs/graphs/x64/Debug/graphs.tlog/CL.write.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../cpp/graphs/graphs/x64/Debug/graphs.tlog/graphs.lastbuildstate" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../cpp/graphs/graphs/x64/Debug/graphs.tlog/link.command.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../cpp/graphs/graphs/x64/Debug/graphs.tlog/link.read.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../cpp/graphs/graphs/x64/Debug/graphs.tlog/link.write.1.tlog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../cpp/graphs/graphs/x64/Debug/vc143.idb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../cpp/graphs/graphs/x64/Debug/vc143.pdb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../cpp/graphs/x64/Debug/graphs.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../cpp/graphs/x64/Debug/graphs.pdb" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2II5hknzwINKHn46TA9N5phT22O" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "C:/Users/dan03/Desktop/homework/newtwork/graph"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="register_1" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="60698b1c-8e7e-4d2a-bc4b-ea9361db2c88" name="Changes" comment="" />
+      <created>1669856377837</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1669856377837</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/main.py</url>
+          <line>8</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
