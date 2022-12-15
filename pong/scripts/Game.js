@@ -226,6 +226,23 @@ class Game {
 		console.log(this.ball.velocity)
 	}
 
+	player_speed_choose(speed_id){
+		let speed = 0
+		switch (speed_id){
+			case 0:
+				speed = 200
+				break
+			case 1:
+				speed = 400
+				break
+			case 2:
+				speed = 1000
+				break
+		}
+		this.leftPlatform.PLAYER_SPEED = speed
+		this.rightPlatform.PLAYER_SPEED = speed
+	}
+
     onGoal(isLeft) {
 		const left_target = this.leftPlatform
 		const right_target = this.rightPlatform
@@ -287,7 +304,7 @@ class Game {
 
         const OFFSET_H = 40
         this.leftPlatform = new Platform( new Vector2(OFFSET_H, this.HEIGHT / 2 - (Platform.H / 2)), this.ball, this.HEIGHT, this.WIDTH)
-        this.rightPlatform = new Platform( new Vector2(this.WIDTH - OFFSET_H - Platform.W, this.HEIGHT / 2 - (Platform.H / 2)), this.ball, this.HEIGHT, this.WIDTH)
+        this.rightPlatform = new Platform( new Vector2(this.WIDTH - OFFSET_H - Platform.W, this.HEIGHT / 2 - (Platform.H/ 2)), this.ball, this.HEIGHT, this.WIDTH)
 
         document.addEventListener('keydown', (e) => this.onInput(e))
         // document.addEventListener('keydown', this.onInput)

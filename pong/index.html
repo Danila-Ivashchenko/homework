@@ -30,6 +30,7 @@
 						</div>
 						<div class="settings">
 							<div class="complexity">
+								Сложность бота
 								<button onclick="complexity_choose('left', 0)">Лёгкий</button>
 								<button onclick="complexity_choose('left', 1)">Средний</button>
 								<button onclick="complexity_choose('left', 2)">Сложный</button>
@@ -50,6 +51,23 @@
 							</div>
 						</div>
 					</div>
+					<div class="middle">
+						<div class="settings">
+							Настройки
+								Скорость игрока
+								<div class="speed_player_box">
+									<button onclick="player_speed_choose(0)">Медленный</button>
+									<button onclick="player_speed_choose(1)">Средний</button>
+									<button onclick="player_speed_choose(2)">Быстрый</button>
+								</div>
+								Скорость мяча
+								<div class="speed_ball_box">
+									<button onclick="ball_speed_choose(1)">Обычный</button>
+									<button onclick="ball_speed_choose(2)">Быстрый</button>
+									<button onclick="ball_speed_choose(3)">Очень быстрый</button>
+								</div>
+						</div>
+					</div>
 					<div class="right_side">
 						<div class="count_section">
 							<span>Счёт:</span>
@@ -57,14 +75,10 @@
 						</div>
 						<div class="settings">
 							<div class="complexity">
+								Сложность бота
 								<button onclick="complexity_choose('right', 0)">Лёгкий</button>
 								<button onclick="complexity_choose('right', 1)">Средний</button>
 								<button onclick="complexity_choose('right', 2)">Сложный</button>
-							</div>
-							<div class="speed_ball_box">
-								<button onclick="ball_speed_choose(1)">Обычный</button>
-								<button onclick="ball_speed_choose(2)">Быстрый</button>
-								<button onclick="ball_speed_choose(5)">Очень быстрый</button>
 							</div>
 							<div class="choose_box">
 								<div class="player_status" id="right_ps">Игрок</div>

@@ -55,4 +55,9 @@ function complexity_choose(who, complexity_id){
 function ball_speed_choose(complexity_id){
 	game.ball_speed_choose(complexity_id)
 }
+
+function player_speed_choose(speed_id){
+	game.player_speed_choose(speed_id)
+}
+
  

@@ -5,6 +5,10 @@ body{
 	background-color: black;
 }
 
+button{
+	cursor: pointer;
+}
+
 .wrapper{
 	display: flex;
 	flex-direction: column;
@@ -32,25 +36,41 @@ body{
 
 .inner{
 	display: flex;
+	justify-content: center;
+	align-items: center;
 	height: 100%;
 }
 
-.left_side, .right_side{
+.left_side, .right_side, .middle{
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	height: 100%;
-	width: 50%;
+	/* width: 50%; */
 	/* border: 1px dashed red; */
 	box-sizing: border-box;
 }
 
 .left_side{
 	border-right: 5px dashed white;
+	padding-right: 20px;
+}
+
+.right_side{
+	border-left: 5px dashed white;
+	padding-left: 20px;
+}
+
+.middle{
+	margin: 0 20px;
 }
 
 .settings{
 	display: flex;
+}
+
+.middle .settings{
+	flex-direction: column;
 }
 
 .count_section{
@@ -64,6 +84,8 @@ body{
 .choose_box{
 	border: 1px solid white;
 	box-sizing: border-box;
+	margin: 0 20px;
+	padding: 20px;
 }
 
 .togle_player {
@@ -72,10 +94,6 @@ body{
 	font-size: 22px;
 	border: 1px solid white;
 	padding: 10px;
-}
-
-.togle_player:focus{
-	/* background-color: red; */
 }
 
 .player_status{
@@ -103,4 +121,19 @@ body{
 	height: 30px;
 	text-align: center;
 	line-height: 30px;
+}
+
+.complexity{
+	display: flex;
+	flex-direction: column;
+}
+
+.complexity button, .middle .settings button {
+	background-color: rgba(0, 0, 0, 0);
+	color: white;
+	border: 1px solid white;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: 600;
+	font-size: 16px;
+	margin: 3px 0;
 }
