@@ -2,6 +2,14 @@ const left_counter = document.querySelector("#left_counter")
 const right_counter = document.querySelector("#right_counter")
 const PLATFORM_COLOR = "#fff"
 
+function play_audio(filename){
+	console.log(filename)
+	let audio = new Audio(); // Создаём новый элемент Audio
+	audio.volume = 0.1
+	audio.src = 'audio/' + filename; // Указываем путь к звуку "клика"
+	audio.autoplay = true; // Автоматически запускаем
+}
+
 class Platform {
 
     static get P() {
@@ -48,8 +56,7 @@ class Platform {
 		this.mode = 0
         this.iState = 0
         this.dState = 0
-		// this.PLAYER_SPEED = 200
-		this.PLAYER_SPEED = 1000
+		this.PLAYER_SPEED = 200
 		this.BOT_SPEED = 200
     }
 
@@ -145,6 +152,7 @@ class Ball {
 		// console.log(bottomY, this.fieldHeight)
         if (bottomY >= this.fieldHeight || topY <= 0) {
             this.velocity.y *= -1
+			play_audio('bounce_table.mp3')
         }
 
 		// забили гол
@@ -178,6 +186,7 @@ class Ball {
         
         if ( bX >= pX - 10 && bX < pX &&  bY >= pY && bY <= pY + Platform.H ) {
             this.velocity.x *= -1
+			play_audio('bounce.mp3')
         }
     }
 }
@@ -263,7 +272,7 @@ class Game {
 				
 			if (this.isBotLeft){
 				this.ball.velocity = Vector2.random(100 * this.ball.speed, 200 * this.ball.speed, -200 * this.ball.speed, 200 * this.ball.speed)
-				console.log(this.ball.velocity)
+				play_audio('bounce.mp3')
 			} else {
 				left_target.position.y = this.HEIGHT / 2
 				this.ball.velocity = new Vector2()
@@ -282,7 +291,7 @@ class Game {
 					
 			if (this.isBotRight){
 				this.ball.velocity = Vector2.random(-100 * this.ball.speed, -200 * this.ball.speed, -200 * this.ball.speed, 200 * this.ball.speed)
-				console.log(this.ball.velocity)
+				play_audio('bounce.mp3')
 			} else {
 				right_target.position.y = this.HEIGHT / 2
 				this.ball.velocity = new Vector2()
@@ -322,12 +331,12 @@ class Game {
                     // Начинаем игру
                     this.gameState = Game.States.GAME_PROCESS
                 } else if (this.gameState === Game.States.GAME_PLAYER_RESPAWN_LEFT) {
-					this.ball.velocity = Vector2.random(100 * this.ball.speed, 200 * this.ball.speed, -200 * this.ball.speed, 200 * this.ball.speed) 
-					console.log(this.ball.velocity, "not here sss")
+					this.ball.velocity = Vector2.random(100 * this.ball.speed, 200 * this.ball.speed, -200 * this.ball.speed, 200 * this.ball.speed)
+					play_audio('bounce.mp3')
 					this.gameState = Game.States.GAME_PROCESS
                 } else if (this.gameState === Game.States.GAME_PLAYER_RESPAWN_RIGHT) {
 					this.ball.velocity = Vector2.random(-100 * this.ball.speed, -200 * this.ball.speed, -200 * this.ball.speed, 200 * this.ball.speed)
-					console.log(this.ball.velocity, 'here')
+					play_audio('bounce.mp3')
 					this.gameState = Game.States.GAME_PROCESS
                 }
                 break
