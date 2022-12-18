@@ -31,7 +31,7 @@ public:
 	virtual double square() = 0;
 	virtual double perimetr() = 0;
 	friend double vector_lenght(const Point& p1, const Point& p2);
-	~Figure();
+	//~Figure();
 };
 
 
@@ -84,13 +84,13 @@ public:
 	virtual double perimetr();
 };
 
-
-class Polygon : public Figure {
-public:
-	Polygon();
-	Polygon(const string& filename);
-	virtual void name();
-	virtual void show_points();
-	virtual double square();
-	virtual double perimetr();
-};
+//
+//class Polygon : public Figure {
+//public:
+//	Polygon();
+//	Polygon(const string& filename);
+//	virtual void name();
+//	virtual void show_points();
+//	virtual double square();
+//	virtual double perimetr();
+//};

@@ -9,9 +9,9 @@ double vector_lenght(const Point& p1, const Point& p2) {
 	return sqrt((p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y));
 }
 
-Figure::~Figure() {
-	delete points;
-}
+//Figure::~Figure() {
+//	delete points;
+//}
 
 /* Треугольник */
 
@@ -65,8 +65,8 @@ Rectangle::Rectangle(const Point& a, const Point& b, const Point& c, Point& d) {
 	points[1] = b;
 	points[2] = c;
 	points[3] = d;
-	if (a.x != b.x || a.y != d.y || c.y != b.y || c.x != d.x)
-		throw exception();
+	//if (a.x != b.x || a.y != d.y || c.y != b.y || c.x != d.x)
+	//	throw exception();
 }
 
 void Rectangle::name() {
@@ -146,17 +146,17 @@ double Circle::perimetr() {
 
 /* Многоугольник */
 
-Polygon::Polygon() {
-	nodeCount = 0;
-}
-
-Polygon::Polygon(const string& filename) {
-	ifstream in(filename);
-	in >> nodeCount;
-	points = new Point[nodeCount];
-	for (int i = 0; i < nodeCount; i++) {
-		in >> points[i].x >> points[i].y;
-	}
-}
+//Polygon::Polygon() {
+//	nodeCount = 0;
+//}
+//
+//Polygon::Polygon(const string& filename) {
+//	ifstream in(filename);
+//	in >> nodeCount;
+//	points = new Point[nodeCount];
+//	for (int i = 0; i < nodeCount; i++) {
+//		in >> points[i].x >> points[i].y;
+//	}
+//}
 
 
