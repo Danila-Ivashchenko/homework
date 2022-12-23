@@ -18,6 +18,13 @@ struct Point
 		out << point.x << " " << point.y;
 		return out;
 	};
+
+	bool operator ==(const Point& p) {
+		return x == p.x && y == p.y;
+	}
+	double vector_distance(const Point& p) {
+		return sqrt((x - p.x) * (x - p.x) + (y - p.y) * (y - p.y));
+	}
 };
 
 
@@ -31,7 +38,7 @@ public:
 	virtual double square() = 0;
 	virtual double perimetr() = 0;
 	friend double vector_lenght(const Point& p1, const Point& p2);
-	//~Figure();
+	~Figure();
 };
 
 

@@ -1,2 +1,14 @@
 ﻿  main.cpp
-  geometry.vcxproj -> C:\Users\dan03\OneDrive\Рабочий стол\homework\cpp\geometry\Debug\geometry.exe
+C:\Users\dan03\Desktop\homework\cpp\geometry\geometry\main.cpp(162,13): warning C4804: >: небезопасное использование типа "bool" в операции
+C:\Users\dan03\Desktop\homework\cpp\geometry\geometry\main.cpp(166,9): warning C4804: +=: небезопасное использование типа "bool" в операции
+C:\Users\dan03\Desktop\homework\cpp\geometry\geometry\main.cpp(168,5): warning C4804: +=: небезопасное использование типа "bool" в операции
+C:\Users\dan03\Desktop\homework\cpp\geometry\geometry\main.cpp(169,5): warning C4804: /=: небезопасное использование типа "bool" в операции
+C:\Users\dan03\Desktop\homework\cpp\geometry\geometry\main.cpp(169,5): warning C4804: /: небезопасное использование типа "bool" в операции
+C:\Users\dan03\Desktop\homework\cpp\geometry\geometry\main.cpp(247,27): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\dan03\Desktop\homework\cpp\geometry\geometry\main.cpp(274,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\dan03\Desktop\homework\cpp\geometry\geometry\main.cpp(275,31): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\dan03\Desktop\homework\cpp\geometry\geometry\main.cpp(284,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\dan03\Desktop\homework\cpp\geometry\geometry\main.cpp(286,31): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\dan03\Desktop\homework\cpp\geometry\geometry\main.cpp(295,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\dan03\Desktop\homework\cpp\geometry\geometry\main.cpp(353,39): warning C4018: <: несоответствие типов со знаком и без знака
+  geometry.vcxproj -> C:\Users\dan03\Desktop\homework\cpp\geometry\Debug\geometry.exe
