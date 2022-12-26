@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -38,7 +39,7 @@ public:
 	virtual double square() = 0;
 	virtual double perimetr() = 0;
 	friend double vector_lenght(const Point& p1, const Point& p2);
-	~Figure();
+	//~Figure();
 };
 
 
@@ -50,6 +51,7 @@ public:
 	virtual void show_points();
 	virtual double square();
 	virtual double perimetr();
+	friend Figure;
 };
 
 class Rectangle : public Figure {
@@ -60,6 +62,7 @@ public:
 	virtual void show_points();
 	virtual double square();
 	virtual double perimetr();
+	friend Figure;
 };
 
 class Square : public Rectangle {
@@ -67,6 +70,8 @@ public:
 	Square() : Rectangle() {};
 	Square(const Point& a, const Point& b, const Point& c, Point& d) : Rectangle(a, b, c, d) {};
 	virtual void name();
+	friend Figure;
+
 };
 
 class Elips : public Figure {
@@ -79,6 +84,8 @@ public:
 	virtual void show_points();
 	virtual double square();
 	virtual double perimetr();
+	friend Figure;
+
 };
 
 
@@ -89,15 +96,17 @@ public:
 	virtual void name();
 	virtual void show_points();
 	virtual double perimetr();
+	friend Figure;
+
 };
 
-//
-//class Polygon : public Figure {
-//public:
-//	Polygon();
-//	Polygon(const string& filename);
-//	virtual void name();
-//	virtual void show_points();
-//	virtual double square();
-//	virtual double perimetr();
-//};
+
+class Polygon : public Figure {
+public:
+	Polygon();
+	Polygon(vector <Point> a_points);
+	virtual void name();
+	virtual void show_points();
+	virtual double square();
+	virtual double perimetr();
+};

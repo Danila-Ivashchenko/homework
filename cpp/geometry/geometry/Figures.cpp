@@ -9,9 +9,9 @@ double vector_lenght(const Point& p1, const Point& p2) {
 	return sqrt((p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y));
 }
 
-Figure::~Figure() {
-	delete points;
-}
+//Figure::~Figure() {
+//	delete points;
+//}
 
 /* Треугольник */
 
@@ -145,11 +145,12 @@ double Circle::perimetr() {
 }
 
 /* Многоугольник */
-//
-//Polygon::Polygon() {
-//	nodeCount = 0;
-//}
-//
+
+
+Polygon::Polygon() {
+	nodeCount = 0;
+}
+
 //Polygon::Polygon(const string& filename) {
 //	ifstream in(filename);
 //	in >> nodeCount;
@@ -159,4 +160,38 @@ double Circle::perimetr() {
 //	}
 //}
 
+Polygon::Polygon(vector <Point> a_points) {
+	nodeCount = a_points.size();
+	points = new Point[nodeCount];
+
+	for (int i = 0; i < nodeCount; i++) {
+		points[i] = a_points[i];
+	}
+}
+
+
+void Polygon::name() {
+	cout << "Poligon" << endl;
+}
+
+double Polygon::square() {
+	double square = 0;
+	int j = nodeCount - 1;
+	for (int i = 0; i < nodeCount; i++) {
+		square += ((points[j].x + points[i].x) * (points[j].y - points[i].y));
+		j = i;
+	}
+	return abs(square) / 2;
+}
+
+void Polygon::show_points()
+{
+	for (int i = 0; i < nodeCount; i++)
+		cout << points[i] << " ";
+}
+
+double Polygon::perimetr()
+{
+	return 0.0;
+}
 

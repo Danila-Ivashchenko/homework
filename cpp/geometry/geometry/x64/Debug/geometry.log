@@ -1,10 +1,3 @@
 ﻿  Figures.cpp
-  main.cpp
-C:\Users\dan03\Desktop\homework\cpp\geometry\geometry\main.cpp(162,13): warning C4804: >: небезопасное использование типа "bool" в операции
-C:\Users\dan03\Desktop\homework\cpp\geometry\geometry\main.cpp(166,9): warning C4804: +=: небезопасное использование типа "bool" в операции
-C:\Users\dan03\Desktop\homework\cpp\geometry\geometry\main.cpp(168,5): warning C4804: +=: небезопасное использование типа "bool" в операции
-C:\Users\dan03\Desktop\homework\cpp\geometry\geometry\main.cpp(169,5): warning C4804: /=: небезопасное использование типа "bool" в операции
-C:\Users\dan03\Desktop\homework\cpp\geometry\geometry\main.cpp(169,5): warning C4804: /: небезопасное использование типа "bool" в операции
-C:\Users\dan03\Desktop\homework\cpp\geometry\geometry\main.cpp(230,30): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
-  Создание кода...
-  geometry.vcxproj -> C:\Users\dan03\Desktop\homework\cpp\geometry\x64\Debug\geometry.exe
+C:\Users\dan03\OneDrive\Рабочий стол\homework\cpp\geometry\geometry\Figures.cpp(164,29): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
+  geometry.vcxproj -> C:\Users\dan03\OneDrive\Рабочий стол\homework\cpp\geometry\x64\Debug\geometry.exe
