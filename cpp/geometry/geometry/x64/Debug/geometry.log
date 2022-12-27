@@ -1,3 +1,7 @@
-﻿  Figures.cpp
-C:\Users\dan03\OneDrive\Рабочий стол\homework\cpp\geometry\geometry\Figures.cpp(164,29): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
-  geometry.vcxproj -> C:\Users\dan03\OneDrive\Рабочий стол\homework\cpp\geometry\x64\Debug\geometry.exe
+﻿  main.cpp
+C:\Users\dan03\Desktop\homework\cpp\geometry\geometry\main.cpp(196,30): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\dan03\Desktop\homework\cpp\geometry\geometry\main.cpp(264,47): warning C4267: return: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\dan03\Desktop\homework\cpp\geometry\geometry\main.cpp(272,30): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\dan03\Desktop\homework\cpp\geometry\geometry\main.cpp(330,30): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+C:\Users\dan03\Desktop\homework\cpp\geometry\geometry\main.cpp(356,30): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+  geometry.vcxproj -> C:\Users\dan03\Desktop\homework\cpp\geometry\x64\Debug\geometry.exe
