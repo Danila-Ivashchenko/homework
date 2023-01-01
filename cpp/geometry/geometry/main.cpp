@@ -7,57 +7,12 @@
 
 using namespace std;
 
-void print_tests() {
-    Point a(-1, -3), b(3, 4), c(5, -5);
-    Point a1(1, 1), b1(1, 4), c1(5, 4), d1(5, 1);
-    Point c2(4, 4), d2(4, 1);
-    Triangle tr1(a, b, c);
-    Rectangle rt1(a1, b1, c1, d1);
-    Square sq1(a1, b1, c2, d2);
-    Elips el1(2, 4, Point(5, 5));
-    Circle cl1(4.12, Point(5, 5));
-    vector <Point> points; points.push_back(a); points.push_back(b); points.push_back(c); points.push_back(d2);
-    Polygon pl(points);
-
-    tr1.name();
-    tr1.show_points();
-    cout << "S = " << tr1.square() << endl;
-    cout << "P = " << tr1.perimetr() << endl << endl;
-
-    pl.name();
-    pl.show_points();
-    cout << "S = " << pl.square() << endl;
-    cout << "P = " << pl.perimetr() << endl << endl;
-
-    rt1.name();
-    rt1.show_points();
-    cout << "S = " << rt1.square() << endl;
-    cout << "P = " << rt1.perimetr() << endl << endl;
-
-
-    sq1.name();
-    sq1.show_points();
-    cout << "S = " << sq1.square() << endl;
-    cout << "P = " << sq1.perimetr() << endl << endl;
-
-    el1.name();
-    el1.show_points();
-    cout << "S = " << el1.square() << endl;
-    cout << "P = " << el1.perimetr() << endl << endl;
-
-    cl1.name();
-    cl1.show_points();
-    cout << "S = " << cl1.square() << endl;
-    cout << "P = " << cl1.perimetr() << endl << endl;
-
-    cout << tr1.square() << " " << rt1.square() << " " << sq1.square();
-}
-
-
+// расстояние от точки c до вектора a -> b 
 double rotate(const Point& a, const Point& b, const Point& c) {
     return (b.x - a.x) * (c.y - b.y) - (b.y - a.y) * (c.x - b.x);
 }
 
+// запрет точек для проверки (точки входят в состав добавленной фигуры)
 void ban_points(int i, int j, int** arr, int size, set <int*> &banned) {
     if (arr[i][j] == 1 && banned.find(&arr[i][j]) == banned.end()) {
         banned.insert(&arr[i][j]);
@@ -89,6 +44,7 @@ bool point_in_vector(const Point& p, vector <Point>& arr) {
     return false;
 }
 
+// заполнение вектора точками, стоящими рядом
 void fill_points(int i, int j, int** arr, int size, vector <Point>& arr_points) {
     if (arr[i][j] == 1) {
         Point point(j, i);
@@ -116,6 +72,7 @@ void fill_points(int i, int j, int** arr, int size, vector <Point>& arr_points) 
     }
 }
 
+// поиск рядом стоящих точек, равных 1
 vector <Point> find_points(int i, int j, int** arr, int size) {
     vector <Point> arr_points;
     fill_points(i, j, arr, size, arr_points);
@@ -157,23 +114,24 @@ bool is_elips(int i, int j, int** arr, int size) {
 }
 
 Elips make_elips(int i, int j, int** arr, int size) {
-    bool r1 = 0, r2 = 0;
+    double r1 = 0, r2 = 0;
     int i_center = i, j_center = j;
 
-    for (int c = i + 1; c < size && arr[c][j] == 1; c++) {
+    for (int c = i; c < size && arr[c][j] == 1; c++) {
         int buf_rad1 = 0;
-        for (int j1 = j - 1; j1 > 0 && arr[c][j1] == 1; j1--) {
+        for (int j1 = j; j1 > 0 && arr[c][j1] == 1; j1--) {
             if (arr[c][j1] == 1)
-                buf_rad1 += 1;
+                buf_rad1++;
         }
         if (buf_rad1 > r1) {
             i_center = c;
             r1 = buf_rad1;
         }
-        r2 += 1;
+        else
+            break;
+        r2++;
     }
-    r1 += 0.5;
-    r2 /= 2;
+
     Point center(j_center, i_center);
     return Elips(r1, r2, center);
 }
@@ -231,7 +189,84 @@ Rectangle make_rectangle(int i, int j, int** arr, int size) {
 
 // шум
 
+// поиск минимальный выпуклой оболочки, возвращает вектор точек
+vector <Point>  mos(int i, int j, int** arr, int size) {
+    vector <Point> arr_points = find_points(i, j, arr, size);
+
+    int n = arr_points.size();
+    vector <int> p;
+
+    for (int i = 0; i < n; i++)
+        p.push_back(i);
+
+    for (int i = 0; i < n; i++)
+        if (arr_points[i].x < arr_points[0].x)
+            swap(arr_points[i], arr_points[0]);
+
+    vector <int> h;
+    h.push_back(p[0]);
+    p.erase(p.begin());
+    p.push_back(h[0]);
+
+    while (true) {
+        int right = 0;
+        for (int i = 1; i < p.size(); i++)
+            if (rotate(arr_points[h[h.size() - 1]], arr_points[p[right]], arr_points[p[i]]) < 0)
+                right = i;
+        if (p[right] == h[0])
+            break;
+        else {
+            h.push_back(p[right]);
+            p.erase(p.begin() + right);
+        }
+    }
+
+    for (int i = 0; i < h.size() - 1; i++) {
+        for (int j = i + 2; j < h.size() - 1; j++) {
+            double rot = rotate(arr_points[h[i]], arr_points[h[j]], arr_points[h[j - 1]]);
+            if (rot == 0) {
+                h.erase(h.begin() + j - 1);
+                j--;
+            }
+        }
+    }
+    if (h.size() > 2) {
+        if (rotate(arr_points[h[0]], arr_points[h[h.size() - 1]], arr_points[h[h.size() - 2]]) == 0)
+            h.erase(h.begin() + h.size() - 1);
+    }
+
+    for (int i = 0; i < h.size() - 1; i++) {
+        if (arr_points[h[i]].vector_distance(arr_points[h[i + 1]]) == 1)
+            h.erase(h.begin() + i);
+    }
+    if (arr_points[h[0]].vector_distance(arr_points[h[h.size() - 1]]) == 1)
+        h.erase(h.begin() + h.size() - 1);
+
+    vector <Point> new_points;
+    for (auto index : h)
+        new_points.push_back(arr_points[index]);
+
+    return new_points;
+}
+
 bool is_noize(int i, int j, int** arr, int size) {
+    vector <Point> all_points = find_points(i, j, arr, size);
+
+    vector <Point> mos_points = mos(i, j, arr, size);
+    Polygon polygon(mos_points);
+
+    bool is_noize = all_points.size() < polygon.square();
+    // суть провекри в том, что если площадь МВО больше фактической площади фигуры (количества едениц, в пределах 1 фигуры), то значит, что фигура невыпуклая - шум 
+    return all_points.size() < polygon.square() || mos_points.size() < 3;
+}
+
+int noize_square(int i, int j, int** arr, int size) {
+    return find_points(i, j, arr, size).size();
+}
+
+// треугольник
+Triangle make_triangle_2(int i, int j, int** arr, int size) {
+
     vector <Point> arr_points = find_points(i, j, arr, size);
 
     int n = arr_points.size();
@@ -297,230 +332,62 @@ bool is_noize(int i, int j, int** arr, int size) {
         }
     }
 
-    cout << arr_points[h[h_right]] << ", " << arr_points[h[h_left]] << ", " << arr_points[h[h_last]] << ", points - " << arr_points.size() << ", squer - " << polygon.square() << endl;
-    
-    bool is_noize = arr_points.size() < polygon.square();
-    cout << is_noize << endl;
-    return arr_points.size() < polygon.square();
-
-    //int i_hight = int(max(max(arr_points[h[h_right]].y, arr_points[h[h_left]].y), arr_points[h[h_last]].y));
-    //int i_low = int(min(min(arr_points[h[h_right]].y, arr_points[h[h_left]].y), arr_points[h[h_last]].y));
-
-    //cout << "i_hight - " << i_hight << ", i_low - " << i_low << ", " << i_hight - i_low << endl;
-
-    //int j_left = j;
-    //int j_right = 0;
-    //for (int c = j; arr[i_low][c] == 1; c++)
-    //    j_right = c;
-
-
-    //bool is_noize = false;
-    //cout << "right - " << j_right << " left - " << j_left << endl;
-
-    //for (int v = i_low; i < i_hight && !is_noize; v++) {
-    //    //cout << "i = " << v << endl;
-    //    for (int c = j_left; c < j_right; c++) {
-    //        if (arr[v][c] != 1) {
-    //            cout << "NOIZE " << v << " ; " << c << endl;
-    //            is_noize = true;
-    //            break;
-    //        }
-    //    }
-    //    if (arr[v + 1][j_right + 1] == 1)
-    //        j_right += 1;
-    //    else if (arr[v + 1][j_right] == 1)
-    //        j_right += 0;
-    //    else if (arr[v + 1][j_right - 1] == 1)
-    //        j_right -= 1;
-    //    else
-    //        j_right = -1;
-
-    //    if (arr[v + 1][j_left - 1] == 1)
-    //        j_left -= 1;
-    //    else if (arr[v + 1][j_left] == 1)
-    //        j_left += 0;
-    //    else if (arr[v + 1][j_left + 1] == 1)
-    //        j_left += 1;
-    //    else
-    //        j_left = -1;
-    //    //cout << "right - " << j_right << " left - " << j_left << endl;
-
-    //    if (j_left < 0 || j_right < 0) {
-    //        cout << "j_right - " << j_right << " j_left - " << j_left << " i - " << v << endl;
-    //        if (v != i_hight)
-    //            is_noize = true;
-    //        break;
-    //    }
-    //    if (j_left > j_right) {
-    //        cout << "j_right - " << j_right << " j_left - " << j_left << " i - " << v << endl;
-    //        if (v != i_hight)
-    //            is_noize = true;
-    //        break;
-    //    }
-    //}
-
+    return Triangle(arr_points[h[h_right]], arr_points[h[h_left]], arr_points[h[h_last]]);
 }
 
-vector <Point>  mos(int i, int j, int** arr, int size) {
-    vector <Point> arr_points = find_points(i, j, arr, size);
-    
-    int n = arr_points.size();
-    vector <int> p;
+Triangle make_triangle(int i, int j, int** arr, int size) {
+    vector <Point> arr_points = mos(i, j, arr, size);
 
-    for (int i = 0; i < n; i++)
-        p.push_back(i);
-
-    for (int i = 0; i < n; i++)
-        if (arr_points[i].x < arr_points[0].x)
-            swap(arr_points[i], arr_points[0]);
-
-    vector <int> h;
-    h.push_back(p[0]);
-    p.erase(p.begin());
-    p.push_back(h[0]);
-
-    while (true){
-        int right = 0;
-        for (int i = 1; i < p.size(); i++)
-            if (rotate(arr_points[h[h.size() - 1]], arr_points[p[right]], arr_points[p[i]]) < 0)
-                right = i;
-        if (p[right] == h[0])
-            break;
-        else {
-            h.push_back(p[right]);
-            p.erase(p.begin() + right);
-        }
-    }
-
-    for (int i = 0; i < h.size() - 1; i++) {
-        for (int j = i + 2; j < h.size() - 1; j++) {
-            double rot = rotate(arr_points[h[i]], arr_points[h[j]], arr_points[h[j - 1]]);
-            if ( rot == 0) {
-                h.erase(h.begin() + j - 1);
-                j--;
-            }
-        }
-    }
     int h_right = 0;
     int h_left = 0;
-    
-    for (int i = 0; i < h.size(); i++) {
-        if (arr_points[h[i]].x > arr_points[h[h_left]].x)
+
+    for (int i = 0; i < arr_points.size(); i++) {
+        if (arr_points[i].x > arr_points[h_left].x)
             h_left = i;
-        if (arr_points[h[i]].x < arr_points[h[h_right]].x)
+        if (arr_points[i].x < arr_points[h_right].x)
             h_right = i;
     }
 
     int h_last = 0;
     int rotate_last = 0;
 
-    for (int i = 0; i < h.size(); i++) {
-        if (abs(rotate(arr_points[h[h_right]], arr_points[h[h_left]], arr_points[h[i]])) > rotate_last) {
-            rotate_last = abs(rotate(arr_points[h[h_right]], arr_points[h[h_left]], arr_points[h[i]]));
+    for (int i = 0; i < arr_points.size(); i++) {
+        if (abs(rotate(arr_points[h_right], arr_points[h_left], arr_points[i])) > rotate_last) {
+            rotate_last = abs(rotate(arr_points[h_right], arr_points[h_left], arr_points[i]));
             h_last = i;
         }
     }
 
-    cout << arr_points[h[h_right]] << ", " << arr_points[h[h_left]] << ", " << arr_points[h[h_last]] << ", points - " << arr_points.size() << endl;
-    //cout << arr_points[h[h_right]].vector_distance(arr_points[h[h_left]]) << ", " << arr_points[h[h_left]].vector_distance(arr_points[h[h_last]]) << ", " << arr_points[h[h_last]].vector_distance(arr_points[h[h_right]]) << ", points - " << arr_points.size() << endl;
-
-    int i_hight = int(max(max(arr_points[h[h_right]].y, arr_points[h[h_left]].y), arr_points[h[h_last]].y));
-    int i_low = int(min(min(arr_points[h[h_right]].y, arr_points[h[h_left]].y), arr_points[h[h_last]].y));
-
-    cout << i_hight << ", " << i_low << ", " << i_hight - i_low << endl;
-
-    int j_left = j;
-    int j_right = 0;
-    for (int c = j; arr[i_low][c] == 1; c++)
-        j_right = c;
-    
-
-    bool is_noize = false;
-    cout << "left - " << j_left << ", right - " << j_right << endl;
-    for (int v = i_low; i < i_hight; i++) {
-        for (int c = j_left; c < j_right; c++) {
-            if (arr[v][c] != 1) {
-                cout << v << " ; " << c << endl;
-                is_noize = true;
-                break;
-            }
-        }
-        if (arr[v + 1][j_right - 1] == 1)
-            j_right -= 1;
-        else if (arr[v + 1][j_right] == 1)
-            j_right += 0;
-        else if (arr[v + 1][j_right + 1] == 1)
-            j_right += 1;
-        else
-            j_right = -1;
-
-        if (arr[v + 1][j_left + 1] == 1)
-            j_left += 1;
-        else if (arr[v + 1][j_left] == 1)
-            j_left += 0;
-        else if (arr[v + 1][j_left - 1] == 1)
-            j_left -= 1;
-        else
-            j_left = -1;
-
-        if (j_left < 0 || j_right < 0) {
-            is_noize = true;
-            cout << "left - " << j_left << ", right - " << j_right << endl;
-            break;
-        }
-    }
-
-    cout << "is noize - " << is_noize << endl;
-
-    //for (int i = 0; i < h.size() - 1; i++) {
-    //    cout << arr_points[h[i]] << endl;
-    //    for (int j = i + 2; j < h.size() - 1; j++)
-    //        cout << "\t" << arr_points[h[j - 1]] << ", " << arr_points[h[j]] << " - " << rotate(arr_points[h[i]], arr_points[h[j - 1]], arr_points[h[j]]) << endl;
-    //}
-
-    if (h.size() > 2) {
-        if (rotate(arr_points[h[0]], arr_points[h[h.size() - 1]], arr_points[h[h.size() - 2]]) == 0)
-            h.erase(h.begin() + h.size() - 1);
-    }
-
-    for (int i = 0; i < h.size() - 1; i++) {
-        if (arr_points[h[i]].vector_distance(arr_points[h[i + 1]]) == 1)
-            h.erase(h.begin() + i);
-    }
-    if (arr_points[h[0]].vector_distance(arr_points[h[h.size() - 1]]) == 1)
-        h.erase(h.begin() + h.size() - 1);
-    
-    vector <Point> new_points;
-    for (auto index : h)
-        new_points.push_back(arr_points[index]);
-
-
-
-    return new_points;
+    return Triangle(arr_points[h_right], arr_points[h_left], arr_points[h_last]);
 }
 
 int main()
 {
-    //print_tests();
-
-    //ifstream file("files/noize.txt");
-    //int size = 30;
-
     ifstream file("files/input1.dat");
     int size = 200;
-
-    //ifstream file("files/elips.txt");
-
     
-    int** points = new int*[size];
-    set <int*> banned_points;
-    vector <Rectangle> rectangls;
+    int** points = new int*[size]; // двумерный массив точек (0, 1) из файла
+
+    set <int*> banned_points; // сет указателей на точки, которые находятся в фигурах, которые уже нашли
+
+    vector <Rectangle> rectangles; // массив прямоугольников
     int rectangles_count = 0;
-    vector <Elips> elipses;
+
+    vector <Elips> elipses; // массив элипсов
     int elipses_count = 0;
-    vector <Triangle> triangles;
+
+    vector <Triangle> triangles; // массив триугольников
     int triangles_count = 0;
-    vector <Figure*> figures;
+
+    vector <Polygon> noizes; // массив шумов
+    int noizes_count = 0;
+
+    vector <Figure*> figures; // массив указателей на все фигуры
+
+    int noize_squares = 0; // суммарная площадь шумов
+    double rectangle_squares = 0; // суммарная площадь прямоугольников
+    double elips_squares = 0; // суммарная площадь элипсов
+    double triangle_squares = 0; // суммарная площадь треугольников
 
     for (int i = 0; i < size; i++) {
         points[i] = new int[size];
@@ -539,65 +406,54 @@ int main()
         for (int j = 0; j < size; j++) {
             if (points[i][j] == 1 && banned_points.find(&points[i][j]) == banned_points.end()) {
                 if (is_elips(i, j, points, size)) {
-                    cout << "Is elips" << endl << endl;
+                    //cout << "Is elips" << endl << endl;
                     ban_points(i, j, points, size, banned_points);
                     elipses.push_back(make_elips(i, j, points, size));
-                    //cout << &elipses[elipses_count] << endl;
-                    //figures.push_back(&elipses[elipses_count]);
+                    elips_squares += elipses[elipses_count].square();
                     elipses_count += 1;
                 } else if (is_rectangle(i, j, points, size)) {
-                    cout << "Is rectangle" << endl << endl;
+                    //cout << "Is rectangle" << endl << endl;
                     ban_points(i, j, points, size, banned_points);
-                    rectangls.push_back(make_rectangle(i, j, points, size));
-                    //cout << &rectangls[rectangles_count] << endl;
-                    //figures.push_back(&rectangls[rectangles_count]);
+                    rectangles.push_back(make_rectangle(i, j, points, size));
+                    rectangle_squares += rectangles[rectangles_count].square();
                     rectangles_count += 1;
                 }
-                /*else if (mos(i, j, points, size).size()){
-                    cout << "Is triangle" << endl;
-                    cout << "j - " << j << ", i - " << i << endl;
-                    ban_points(i, j, points, size, banned_points);
-                }*/
                 else if (is_noize(i, j, points, size)) {
                     ban_points(i, j, points, size, banned_points);
-                    cout << "Is noize" << endl;
-                    cout << "i - " << i << " j - " << j << endl;
-                    //cout << p.size() << endl;
-                    //for (int i = 0; i < p.size(); i++)
-                    //    cout << i << " - " << p[i] << endl;
-                    //cout << "j - " << j << ", i - " << i << endl;
+                    //cout << "Is noize" << endl;
+                    noizes.push_back(mos(i, j, points, size));
+                    noize_squares += noize_square(i, j, points, size);
+                    noizes_count += 1;
                 }
                 else {
                     ban_points(i, j, points, size, banned_points);
-                    cout << "Is triangle" << endl;
-                    cout << "i - " << i << " j - " << j << endl;
+                    //cout << "Is triangle" << endl;
+                    triangles.push_back(make_triangle(i, j, points, size));
+                    triangle_squares += triangles[triangles_count].square();
+                    triangles_count += 1;
                 }
             }
         }
     }
+    for (int i = 0; i < size; i++)
+        delete points[i];
+    delete points;
 
-    //for (int i = 0; i < rectangls.size(); i++)
-    //    figures.push_back(&rectangls[i]);
-    //for (int i = 0; i < elipses.size(); i++)
-    //    figures.push_back(&elipses[i]);
+    for (int i = 0; i < rectangles.size(); i++)
+        figures.push_back(&rectangles[i]);
+    for (int i = 0; i < elipses.size(); i++)
+        figures.push_back(&elipses[i]);
+    for (int i = 0; i < triangles.size(); i++)
+        figures.push_back(&triangles[i]);
 
-    //cout << endl;
-    //int sum = 0;
-    //for (auto f : figures) {
-    //    sum += f->square();
-    //    cout << f << endl;
-    //}
+    cout << "Triangles:" << endl;
+    cout << "\tcount - " << triangles_count << ", total area = " << triangle_squares << endl;
+    cout << "Elipses:" << endl;
+    cout << "\tcount - " << elipses_count << ", total area = " << elips_squares << endl;
+    cout << "Rectangles:" << endl;
+    cout << "\tcount - " << rectangles_count << ", total area = " << rectangle_squares << endl;
+    cout << "Noizes:" << endl;
+    cout << "\tcount - " << noizes_count << ", total area = " << noize_squares << endl;
 
-
-    ////cout << endl;
-
-    ////for (int i = 0; i < elipses.size(); i++) {
-    ////    cout <<  &elipses[i] << endl;
-    ////    (&elipses[i])->name();
-    ////    (&elipses[i])->show_points();
-    ////}
-    //
-    //cout << endl << sum;
-
-    return 10;
+    return 1;
 }
