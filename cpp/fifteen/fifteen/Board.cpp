@@ -21,13 +21,57 @@ Board::Board() {
 	shake();
 }
 
+Board::Board(const Board& other){
+	size = other.size;
+	for (int i = 0; i < size; i++) {
+		__cells[i] = new Cell[size];
+		for (int j = 0; j < size; j++) {
+			__cells[i][j].set_value(other.__cells[i][j].get_value());
+		}
+	}
+}
+
 void Board::shake()
 {
 	srand((unsigned)time(0));
-	int moves[4] = {72, 75, 77, 80}; 
+	/*int moves[4] = {72, 75, 77, 80}; 
+	
+	for (int i = 0; i < size; i++) {
+		move(80);
+	}
+	for (int i = 0; i < size; i++) {
+		move(75);
+		for (int i = 0; i < size / 2; i++) {
+			move(72);
+			for (int j = 0; j < size; j++) {
+				move(77);
+			}
+			for (int j = 0; j < size; j++) {
+				move(75);
+			}
+		}
+	}*/
 
-	for (int i = 0; i < size * size * size; i++)
-		move(moves[rand() % 4]);
+	int* indexes = new int[size * size];
+	for (int i = 0; i < size * size; i++)
+		indexes[i] = i;
+	int m = size * size;
+
+	for (int i = 0; i < size; i++){
+		for (int j = 0; j < size; j++) {
+			int k = rand() % m;
+			Cell buf = __cells[(indexes[k]) / size][(indexes[k]) % size];
+			__cells[(indexes[k]) / size][(indexes[k]) % size] = __cells[i][j];
+			__cells[i][j] = buf;
+			indexes[k] = indexes[m - 1];
+			m--;
+		}
+	}
+
+	delete[] indexes;
+
+	//for (int i = 0; i < size * size; i++)
+	//	move(moves[rand() % 4]);
 }
 
 void Board::print() {

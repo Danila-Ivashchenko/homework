@@ -27,6 +27,7 @@ class Board {
 	Cell** __cells = new Cell*[size];
 public:
 	Board();
+	Board(const Board& other);
 	void shake();
 	void move(int dir);
 	bool victory();
