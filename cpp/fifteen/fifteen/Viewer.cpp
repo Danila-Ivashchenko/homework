@@ -10,6 +10,7 @@ void Viewer::print_menu() {
 	std::cout << "Для перемещения костяшек на пустое место используйте стрелочки" << std::endl;
 	std::cout << "Для выхода из игры нажмите \"Esc\"" << std::endl;
 	std::cout << "Для решения головолмки ботом нажмите \"h\"" << std::endl;
+	std::cout << "Для рестарта нажмите \"r\"" << std::endl << std::endl;
 	std::cout << "Для выхода из меню нажмите \"m\"" << std::endl;
 	//std::cout << "Для прочтения прав" << std::endl;
 }
@@ -23,6 +24,14 @@ int Viewer::get_key() {
 	if (code == 224)
 		code = _getch();
 	return code;
+}
+
+void Viewer::print_bot_message() {
+	std::cout << "Для автоматического решения нажмите любую клавишу\nДля выхода из режима авторешения нажмите \"h\"\n";
+}
+
+void Viewer::print_bot_message_error() {
+	std::cout << "Увы, бот не справился с головоломкой до конца, дальше вам придётся доделывать самому(\nНажмите любую клавише для продолжения\n";
 }
 
 void Viewer::print_board(Cell** arr){
@@ -52,4 +61,8 @@ void Viewer::print_victory() {
 
 void Viewer::print_exit() {
 	std::cout << "Нажмите \"Enter\" для выхода их игры";
+}
+
+void Viewer::print_shure_restart(){
+	std::cout << "Нажмите \"Enter\" для рестарта";
 }

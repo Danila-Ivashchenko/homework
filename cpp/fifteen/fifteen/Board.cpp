@@ -34,44 +34,79 @@ Board::Board(const Board& other){
 void Board::shake()
 {
 	srand((unsigned)time(0));
-	/*int moves[4] = {72, 75, 77, 80}; 
-	
-	for (int i = 0; i < size; i++) {
-		move(80);
-	}
-	for (int i = 0; i < size; i++) {
-		move(75);
-		for (int i = 0; i < size / 2; i++) {
-			move(72);
-			for (int j = 0; j < size; j++) {
-				move(77);
+
+	for (int i = 0; i < size * size * size; i++) {
+		int k = rand() % 5;
+		switch (k)
+		{
+		case 0:
+			move_zero_cell(size - 1, 0);
+			move_zero_cell(0, 0);
+			move_zero_cell(0, size - 1);
+			move_zero_cell(size - 1, size - 1);
+			break;
+		case 1:
+			for (int j = 0; j < size - 1; j++) {
+				move_zero_cell(size - j, 0);
+				move_zero_cell(size - j - 1, 0);
+				move_zero_cell(size - j - 1, size - 1);
 			}
-			for (int j = 0; j < size; j++) {
-				move(75);
+			move_zero_cell(size - 1, size - 1);
+			break;
+		case 3:
+			for (int j = 0; j < size - 1; j++) {
+				move_zero_cell(0, size - j);
+				move_zero_cell(0, size - j - 1);
+				move_zero_cell(size - 1, size - j - 1);
+			}
+			move_zero_cell(size - 1, size - 1);
+			break;
+		case 4:
+			move_zero_cell(0, 0);
+			move_zero_cell(0, size - 1);
+			move_zero_cell(size - 1, 0);
+			move_zero_cell(size - 1, size - 1);
+			break;
+		default:
+			break;
+		}
+	}
+	move_zero_cell(rand() % size, rand() % size);
+}
+
+void Board::move_zero_cell(int i_needed, int j_needed){
+	int i_zero = 0, j_zero = 0;
+	for (int i = 0; i < size; i++) {
+		for (int j = 0; j < size; j++)
+			if (__cells[i][j].get_value() == 0) {
+				i_zero = i;
+				j_zero = j;
+			}
+	}
+	while (i_needed != i_zero || j_needed != j_zero) {
+		if (i_needed < 0 || i_needed >= size || j_needed < 0 || j_needed >= size)
+			break;
+		if (j_needed != j_zero) {
+			if (j_needed > j_zero) {
+				move(75); // zero идёт направо
+				j_zero++;
+			}
+			else if (j_needed < j_zero) {
+				move(77); // zero идёт налево
+				j_zero--;
 			}
 		}
-	}*/
-
-	int* indexes = new int[size * size];
-	for (int i = 0; i < size * size; i++)
-		indexes[i] = i;
-	int m = size * size;
-
-	for (int i = 0; i < size; i++){
-		for (int j = 0; j < size; j++) {
-			int k = rand() % m;
-			Cell buf = __cells[(indexes[k]) / size][(indexes[k]) % size];
-			__cells[(indexes[k]) / size][(indexes[k]) % size] = __cells[i][j];
-			__cells[i][j] = buf;
-			indexes[k] = indexes[m - 1];
-			m--;
+		if (i_needed != i_zero) {
+			if (i_needed > i_zero) {
+				move(72); // zero идёт вниз
+				i_zero++;
+			}
+			else if (i_needed < i_zero) {
+				move(80); // zero идёт вверх
+				i_zero--;
+			}
 		}
 	}
-
-	delete[] indexes;
-
-	//for (int i = 0; i < size * size; i++)
-	//	move(moves[rand() % 4]);
 }
 
 void Board::print() {

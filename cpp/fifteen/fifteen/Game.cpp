@@ -10,7 +10,7 @@ void Game::render() {
         play();
         break;
     case 2:
-        restart();
+        end();
         break;
     case 3:
         menu();
@@ -19,6 +19,9 @@ void Game::render() {
         bot_mod();
         break;
     case 5:
+        restart();
+        break;
+    case 6:
         break;
     default:
         break;
@@ -27,7 +30,7 @@ void Game::render() {
 
 void Game::bot_mod() {
     __bot = Bot(*__board);
-    __bot.set_board(*__board);
+    //__bot.set_board(*__board);
     __bot.calculate_moves();
     std::queue <int> moves = __bot.get_moves_codes();
     int code = 0;
@@ -36,15 +39,25 @@ void Game::bot_mod() {
         __board->move(moves.front());
         moves.pop();
         viewer.print_board(__board->get_cells());
+        viewer.print_bot_message();
         code = viewer.get_key();
     }
-    while (code != 104 && code != 109) {
-        code = viewer.get_key();
-        if (code == 109)
-            __status = 3;
-        else if (code == 104)
-            __status = 1;
+    std::cout << __bot.get_status();
+    if (code == 109) {
+        __status = 3;
+    } 
+    else if (code == 104) {
+        __status = 1;
     }
+    else if (!__board->victory()) {
+        viewer.clear_window();
+        viewer.print_board(__board->get_cells());
+        viewer.print_bot_message_error();
+        code = viewer.get_key();
+        __status = 1;
+    }
+    else
+        __status = 1;
 }
 
 void Game::start() {
@@ -73,6 +86,10 @@ void Game::play() {
                 __status = 4;
                 break;
             }
+            else if (code == 114) {
+                __status = 5;
+                break;
+            }
             else {
                 __board->move(code);
                 viewer.clear_window();
@@ -81,6 +98,7 @@ void Game::play() {
         }
         else {
             __status = 2;
+            break;
         }
     }
 }
@@ -89,7 +107,8 @@ void Game::menu() {
     viewer.clear_window();
     viewer.print_menu();
     int code = viewer.get_key();
-    while (code != 109 && code != 27 && code != 104) {
+
+    while (code != 109 && code != 27 && code != 104 && code != 114) {
         if (code == 27) {
             exit();
             break;
@@ -97,21 +116,34 @@ void Game::menu() {
         else
             code = viewer.get_key();
     }
-    std::cout << code << std::endl;
+
     if (code == 109)
         __status = 1;
     if (code == 104)
         __status = 4;
+    if (code == 114)
+        __status = 5;
 }
 
 
 void Game::restart() {
+    viewer.clear_window();
+    viewer.print_shure_restart();
+    int code = viewer.get_key();
+    if (code == 13)
+        __board->restart();
+    __status = 1;
+}
+
+void Game::end() {
     viewer.print_victory();
     int code = viewer.get_key();
     while (code != 13)
         code = viewer.get_key();
     __status = 1;
+    __board->restart();
 }
+
 
 void Game::exit() {
     viewer.print_exit();
@@ -122,7 +154,7 @@ void Game::exit() {
 
 
 void Game::engine() {
-    while (__status != 5) {
+    while (__status != 6) {
         render();
     }
 }

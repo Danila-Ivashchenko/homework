@@ -239,6 +239,7 @@ void Bot::move_zero_to_right(int value) {
 
 void Bot::move_value_to_pos(int value){
 	Coords value_coords = find_value(value);
+
 	int size = __board.get_size();
 	int i_needed = (value - 1) / size;
 	int j_needed = (value - 1) % size;
@@ -246,188 +247,137 @@ void Bot::move_value_to_pos(int value){
 	int j_real = value_coords.j;
 	bool is_corner_fight = (j_needed == size - 1);
 	bool is_corner_bot = (j_needed == 0 && i_needed == size - 1);
-
-	//std::cout << i_needed << ", " << j_needed << std::endl;
-	//std::cout << i_real << ", " << j_real << std::endl;
+	bool is_working_ok = true;
 
 	fixed_cells.insert(value);
 
-	if (i_needed + 1 == i_real && j_needed == j_real) {
-		//std::cout << "TT i_real = " << i_real << " j_real = " << j_real << "; i_needed = " << i_needed << " j_needed = " << j_needed << std::endl;
-		move_zero_to_top(value);
-		keep_zero();
-		if (__i_zero == i_needed && __j_zero == j_needed) {
-			move_zero(i_real, j_real);
-			i_real--;
-		}
-	}
+	if (__status != 2) { // если не случалось ошибки в работе бота
 
-	if (i_needed == i_real && j_needed + 1 == j_real) {
-		//std::cout << "LL i_real = " << i_real << " j_real = " << j_real << "; i_needed = " << i_needed << " j_needed = " << j_needed << std::endl;
-		move_zero_to_left(value);
-		keep_zero();
-		if (__i_zero == i_needed && __j_zero == j_needed) {
-			move_zero(i_real, j_real);
-			j_real--;
-		}
-	}
-
-	if (i_needed != i_real || j_needed != j_real) {
-		if (is_corner_fight)
-			i_needed++;
-
-		if (is_corner_bot) {
-			//std::cout << "CORNER BOT " << value << std::endl;
-			j_needed++;
+		if (i_needed + 1 == i_real && j_needed == j_real) {
+			move_zero_to_top(value);
+			keep_zero();
+			if (__i_zero == i_needed && __j_zero == j_needed) {
+				move_zero(i_real, j_real);
+				i_real--;
+			}
 		}
 
-		while (j_needed != j_real || i_needed != i_real) {
-			if (i_needed > i_real) {
-				//std::cout << "got to bot\n";
-				move_zero_to_bot(value);
-				//__board.print();
-				//__board.move(80);
-				keep_zero();
-				if (__i_zero == i_real + 1 && __j_zero == j_real)
-					move_zero(i_real, j_real);
-				//else
-					//std::cout << "No bot\n";
-			//__board.print();
-				Coords new_coords = find_value(value);
-				if (new_coords.i == i_real + 1 && new_coords.j == j_real)
-					i_real++;
+		if (i_needed == i_real && j_needed + 1 == j_real) {
+			move_zero_to_left(value);
+			keep_zero();
+			if (__i_zero == i_needed && __j_zero == j_needed) {
+				move_zero(i_real, j_real);
+				j_real--;
+			}
+		}
+
+		if (i_needed != i_real || j_needed != j_real) {
+			if (is_corner_fight)
+				i_needed++;
+
+			if (is_corner_bot) {
+				j_needed++;
 			}
 
-			if (j_needed > j_real) {
-				//std::cout << "got to right\n";
-				move_zero_to_right(value);
-			//__board.print();
-				//__board.move(77);
-				keep_zero();
-				if (__i_zero == i_real && __j_zero == j_real + 1)
-					move_zero(i_real, j_real);
-				//else
-					//std::cout << "No right\n";
-			//__board.print();
-				Coords new_coords = find_value(value);
-				if (new_coords.i == i_real && new_coords.j == j_real + 1)
-					j_real++;
+			while ((j_needed != j_real || i_needed != i_real) && is_working_ok) {
+				int last_moves_size = moves_codes.size(); // для контроля ошибки бота
+				if (!is_working_ok) {
+					__status = 2;
+					int a;
+					std::cin >> a;
+					break;
+				}
+				if (i_needed > i_real) {
+					move_zero_to_bot(value);
+					keep_zero();
+					if (__i_zero == i_real + 1 && __j_zero == j_real)
+						move_zero(i_real, j_real);
+					Coords new_coords = find_value(value);
+					if (new_coords.i == i_real + 1 && new_coords.j == j_real)
+						i_real++;
+				}
+
+				if (j_needed > j_real) {
+					move_zero_to_right(value);
+					keep_zero();
+					if (__i_zero == i_real && __j_zero == j_real + 1)
+						move_zero(i_real, j_real);
+					Coords new_coords = find_value(value);
+					if (new_coords.i == i_real && new_coords.j == j_real + 1)
+						j_real++;
+				}
+				if (j_needed < j_real) {
+					move_zero_to_left(value);
+					keep_zero();
+					if (__i_zero == i_real && __j_zero == j_real - 1)
+						move_zero(i_real, j_real);
+					Coords new_coords = find_value(value);
+					if (new_coords.i == i_real && new_coords.j == j_real - 1)
+						j_real--;
+				}
+
+				if (i_needed < i_real) {
+					move_zero_to_top(value);
+					keep_zero();
+					if (__i_zero == i_real - 1 && __j_zero == j_real)
+						move_zero(i_real, j_real);
+					Coords new_coords = find_value(value);
+					if (new_coords.i == i_real - 1 && new_coords.j == j_real)
+						i_real--;
+				}
+				std::cout << last_moves_size << " " << moves_codes.size() << std::endl;
+				if (moves_codes.size() == last_moves_size)
+					is_working_ok = false;
+				else
+					is_working_ok = true;
 			}
-			if (j_needed < j_real) {
-				//std::cout << "got to left\n";
+
+			if (is_corner_fight && is_working_ok) {
 				move_zero_to_left(value);
-			//__board.print();
-				//__board.move(75);
-				keep_zero();
-				if (__i_zero == i_real && __j_zero == j_real - 1)
-					move_zero(i_real, j_real);
-				//else
-					//std::cout << "No left\n";
-			//__board.print();
-				Coords new_coords = find_value(value);
-				if (new_coords.i == i_real && new_coords.j == j_real - 1)
-					j_real--;
+				move_zero(i_needed, j_needed - 2);
+				move_zero(i_needed - 1, j_needed - 2);
+				move_zero(i_needed - 1, j_needed);
+				move_zero(i_needed, j_needed);
+				move_zero(i_needed, j_needed - 1);
+				move_zero(i_needed - 1, j_needed - 1);
+				move_zero(i_needed - 1, j_needed - 2);
+				move_zero(i_needed, j_needed - 2);
 			}
-			
-			if (i_needed < i_real) {
-				//std::cout << "got to top\n";
+			if (is_corner_bot && is_working_ok) {
 				move_zero_to_top(value);
-			//__board.print();
-				//__board.move(72);
-				keep_zero();
-				if (__i_zero == i_real - 1 && __j_zero == j_real)
-					move_zero(i_real, j_real);
-				//else
-					//std::cout << "No top\n";
-			//__board.print();
-				Coords new_coords = find_value(value);
-				if (new_coords.i == i_real - 1 && new_coords.j == j_real)
-					i_real--;
+				move_zero(i_needed - 2, j_needed);
+				move_zero(i_needed - 2, j_needed - 1);
+				move_zero(i_needed, j_needed - 1);
+				move_zero(i_needed, j_needed);
+				move_zero(i_needed - 1, j_needed);
+				move_zero(i_needed - 1, j_needed - 1);
+				move_zero(i_needed - 2, j_needed - 1);
+				move_zero(i_needed - 2, j_needed);
 			}
 		}
-
-		if (is_corner_fight) {
-			move_zero_to_left(value);
-			//__board.move(77);
-			move_zero(i_needed, j_needed - 2);
-			move_zero(i_needed - 1, j_needed - 2);
-			move_zero(i_needed - 1, j_needed);
-			move_zero(i_needed, j_needed);
-			move_zero(i_needed, j_needed - 1);
-			move_zero(i_needed - 1, j_needed - 1);
-			move_zero(i_needed - 1, j_needed - 2);
-			move_zero(i_needed, j_needed - 2);
-			//__board.move(80);
-			//__board.move(75);
-			//__board.move(75);
-			//__board.move(72);
-			//__board.move(77);
-			//__board.move(80);
-			//__board.move(77);
-			//__board.move(72);
-		}
-		if (is_corner_bot) {
-			move_zero_to_top(value);
-			move_zero(i_needed - 2, j_needed);
-			move_zero(i_needed - 2, j_needed - 1);
-			move_zero(i_needed , j_needed - 1);
-			move_zero(i_needed , j_needed);
-			move_zero(i_needed -1, j_needed);
-			move_zero(i_needed -1, j_needed - 1);
-			move_zero(i_needed -2, j_needed - 1);
-			move_zero(i_needed -2, j_needed);
-		}
-	//__board.print();
-		//std::cout << "end\n";
 	}
-//__board.print();
-	/*while (i_needed != i_real || j_needed != j_real) {
-		if (i_needed < i_real) {
-			//std::cout << 1 << std::endl;
-			move_zero_to_top(value);
-			__board.move(72);
-			i_real--;
-		}
-		if (i_needed > i_real) {
-			//std::cout << 2 << std::endl;
-			move_zero_to_bot(value);
-			__board.move(80);
-			i_real++;
-		}
-		if (j_needed < j_real) {
-			//std::cout << 3 << std::endl;
-			move_zero_to_right(value);
-			__board.move(77);
-			j_real--;
-		}
-		if (j_needed < j_real) {
-			//std::cout << 4 << std::endl;
-			move_zero_to_left(value);
-			__board.move(75);
-			j_real++;
-		}
-	}*/
 }
 
 
 void Bot::calculate_moves(){
+	__status = 1;
+	//std::cout << "hello\n";
+
 	while (!moves_codes.empty())
 		moves_codes.pop();
 
 	int size = __board.get_size();
 	for (int i = 0; i < size; i++) {
 		move_value_to_pos(i + 1);
-		//__board.print();
+		//std::cout << "hello\n";
 	}
 	for (int i = 1; i < size; i++)
 		move_value_to_pos(i * size + 1);
 
 	for (int i = 1; i < size; i++)
 		for (int j = 1; j < size; j++)
-			if (i * size + j + 1 < size * size - 5)
+			if (i * size + j + 1 < size * size) {
 				move_value_to_pos(i * size + j + 1);
-	//for (int i = 0; i < size; i++)
-	//	for (int j = 0; j < size; j++)
-	//		if (i * size + j + 1 != size * size)
-	//			move_value_to_pos(i * size + j + 1);
+				//std::cout << "hello\n";
+			}
 }

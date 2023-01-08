@@ -38,13 +38,13 @@ struct Coords{
 
 class Bot {
 	Board __board;
+	int __status = 0; // 0 - бот не работал, 1 - бот отработал корректно, 2 - случалась ошибка в работе бота
+
 	std::set <int> fixed_cells;
 	std::queue <int> moves_codes;
 	int __i_zero = 0, __j_zero = 0;
 	void fill_waves(int i_start, int j_start, int** map_cells, int siz, int i_end, int j_end);
 	std::stack <Coords> make_way(int i_start, int j_start, int** map_cells, int size, int i_end, int j_end);
-public:
-	Bot(const Board& board) : __board(board) {};
 	void keep_zero();
 	Coords find_value(int value);
 	std::stack <Coords> find_way(int i, int j);
@@ -57,9 +57,14 @@ public:
 	void move_zero_to_right(int value);
 
 	void move_value_to_pos(int value);
+public:
+	Bot(const Board& board) : __board(board) {};
+	
 
 	void set_board(Board board) { __board = board; };
 
 	void calculate_moves();
 	std::queue <int> get_moves_codes() { return moves_codes; };
+
+	int get_status() { return __status; };
 };

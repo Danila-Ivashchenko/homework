@@ -25,6 +25,7 @@ friend std::ostream& operator << (std::ostream& out, Cell & cell);
 class Board {
 	int size = 4;
 	Cell** __cells = new Cell*[size];
+	void move_zero_cell(int i_needed, int j_needed);
 public:
 	Board();
 	Board(const Board& other);
