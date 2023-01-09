@@ -182,3 +182,20 @@ bool Board::victory()
 void Board::restart(){
 	shake();
 }
+
+Coords Board::find_zero()
+{
+	for (int i = 0; i < size; i++) {
+		for (int j = 0; j < size; j++) {
+			if (__cells[i][j].get_value() == 0) {
+				return Coords(i, j);
+			}
+		}
+	}
+}
+
+//Board::~Board(){
+//	for (int i = 0; i < size; i++)
+//		delete __cells[i];
+//	delete __cells;
+//}

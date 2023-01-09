@@ -1,3 +1,2 @@
-﻿  Bot.cpp
-C:\Users\dan03\OneDrive\Рабочий стол\homework\cpp\fifteen\fifteen\Bot.cpp(283,45): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+﻿  main.cpp
   fifteen.vcxproj -> C:\Users\dan03\OneDrive\Рабочий стол\homework\cpp\fifteen\x64\Debug\fifteen.exe

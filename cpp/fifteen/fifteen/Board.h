@@ -7,6 +7,13 @@
 class Cell;
 class Board;
 
+
+struct Coords {
+	int i = 0;
+	int j = 0;
+	Coords(int ai, int aj) : i(ai), j(aj) {};
+};
+
 class Cell {
 	int __value;
 	int __x, __y;
@@ -28,6 +35,7 @@ class Board {
 	void move_zero_cell(int i_needed, int j_needed);
 public:
 	Board();
+	//~Board();
 	Board(const Board& other);
 	void shake();
 	void move(int dir);
@@ -36,4 +44,5 @@ public:
 	void restart();
 	int get_size() { return size; };
 	Cell** get_cells() { return __cells; };
+	Coords find_zero();
 };

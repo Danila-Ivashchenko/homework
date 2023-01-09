@@ -29,8 +29,7 @@ void Game::render() {
 }
 
 void Game::bot_mod() {
-    __bot = Bot(*__board);
-    //__bot.set_board(*__board);
+    __bot.set_board(*__board);
     __bot.calculate_moves();
     std::queue <int> moves = __bot.get_moves_codes();
     int code = 0;
@@ -42,7 +41,14 @@ void Game::bot_mod() {
         viewer.print_bot_message();
         code = viewer.get_key();
     }
-    std::cout << __bot.get_status();
+    //while (!moves.empty()) {
+    //    __board->move(moves.front());
+    //    moves.pop();
+    //}
+    viewer.clear_window();
+    viewer.print_board(__board->get_cells());
+    viewer.print_bot_message();
+    code = viewer.get_key();
     if (code == 109) {
         __status = 3;
     } 

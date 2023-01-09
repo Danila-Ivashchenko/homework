@@ -5,40 +5,8 @@
 #include <queue>
 #include <stack>
 
-//
-//class Bot {
-//	Board* __board;
-//	int __j_zero = 0, __i_zero = 0;
-//	int __j_value = 0, __i_value = 0;
-//public:
-//	Bot(Board* board) : __board(board) {};
-//	void keep_zero_cell();
-//	void keep_target_cell(int value);
-//	void move_target_on_position(int value);
-//	int vertical_diff(int value);
-//	int horizontal_diff(int value);
-//
-//	// передвижение кост€шек
-//	//bool move_target_to_letf(int value);
-//	//bool move_target_to_right(int value);
-//	//bool move_target_to_bot(int value);
-//	//bool move_target_to_top(int value);
-//
-//	// передвижение нулевой кост€шки
-//	void move_zero_to_top(int value);
-//	void move_zero_to_left(int value);
-//	void move_zero_to_right(int value);
-//};
-
-struct Coords{
-	int i = 0;
-	int j = 0;
-	Coords(int ai, int aj) : i(ai), j(aj) {};
-};
-
 class Bot {
 	Board __board;
-	int __status = 0; // 0 - бот не работал, 1 - бот отработал корректно, 2 - случалась ошибка в работе бота
 
 	std::set <int> fixed_cells;
 	std::queue <int> moves_codes;
@@ -57,14 +25,15 @@ class Bot {
 	void move_zero_to_right(int value);
 
 	void move_value_to_pos(int value);
+	void clear_all();
+
+	std::queue <int> find_moves_for_graph(Board primary_board, std::queue <int> last_moves);
 public:
 	Bot(const Board& board) : __board(board) {};
-	
 
 	void set_board(Board board) { __board = board; };
 
 	void calculate_moves();
 	std::queue <int> get_moves_codes() { return moves_codes; };
-
-	int get_status() { return __status; };
+	std::queue <int> solve_by_graph();
 };
